@@ -14,6 +14,7 @@ final class PlayerJoinEvent implements Listener
      */
     public function onEvent(ClassEvent $event){
         HotbarManager::load($event->getPlayer());
+
     }
 
 }
