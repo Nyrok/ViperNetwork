@@ -7,6 +7,7 @@ use Nyrok\LobbyCore\Core;
 use Nyrok\LobbyCore\Listeners\DataPacketReceiveEvent;
 use Nyrok\LobbyCore\Listeners\PlayerDropItemEvent;
 use Nyrok\LobbyCore\Listeners\PlayerInteractEvent;
+use Nyrok\LobbyCore\Listeners\PlayerItemUseEvent;
 use Nyrok\LobbyCore\Listeners\PlayerJoinEvent;
 use pocketmine\event\Listener;
 use pocketmine\plugin\Plugin;
@@ -21,7 +22,8 @@ abstract class ListenersManager
             new PlayerJoinEvent(),
             new PlayerInteractEvent(),
             new PlayerDropItemEvent(),
-            new DataPacketReceiveEvent()
+            new DataPacketReceiveEvent(),
+            new PlayerItemUseEvent()
         ];
     }
 

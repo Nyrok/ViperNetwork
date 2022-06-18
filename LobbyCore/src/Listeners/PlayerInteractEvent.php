@@ -6,6 +6,7 @@ use Nyrok\LobbyCore\Managers\LobbyManager;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent as ClassEvent;
+use pocketmine\event\player\PlayerItemUseEvent;
 use pocketmine\item\ItemIds;
 
 final class PlayerInteractEvent implements Listener
@@ -23,9 +24,6 @@ final class PlayerInteractEvent implements Listener
                     break;
                 case ItemIds::COMPASS:
                     LobbyManager::modesForm($event->getPlayer());
-                    break;
-                case ItemIds::FEATHER:
-                    PlayerUtils::bumpPlume($event->getPlayer());
                     break;
             }
         }
