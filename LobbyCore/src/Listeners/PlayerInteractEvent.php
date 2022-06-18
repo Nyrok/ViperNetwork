@@ -23,6 +23,7 @@ final class PlayerInteractEvent implements Listener
                     PlayerUtils::teleportToFFA($event->getPlayer());
                     break;
                 case ItemIds::COMPASS:
+                    $event->getPlayer();
                     LobbyManager::modesForm($event->getPlayer());
                     break;
             }

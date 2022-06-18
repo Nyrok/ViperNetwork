@@ -2,6 +2,8 @@
 namespace Nyrok\LobbyCore;
 
 use Nyrok\LobbyCore\Databases\ConfigDatabase;
+use Nyrok\LobbyCore\Librairies\refaltor\customitemapi\CustomItemAPI;
+use Nyrok\LobbyCore\Librairies\refaltor\customitemapi\traits\UtilsTrait;
 use Nyrok\LobbyCore\Managers\HotbarManager;
 use Nyrok\LobbyCore\Managers\ListenersManager;
 use pocketmine\plugin\PluginBase;
@@ -18,7 +20,10 @@ class Core extends PluginBase
         $this::setInstance($this);
         $this->saveResource("config.yml", true);
 
+        CustomItemAPI::getInstance()->onEnable();
+
         $this->config = new ConfigDatabase();
+
         ListenersManager::initListeners($this);
         HotbarManager::initItems();
 
