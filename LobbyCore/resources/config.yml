@@ -1,0 +1,49 @@
+---
+book:
+  author: "ViperNetwork"
+  title: "Présentation"
+  pages:
+    1: "Salut je suis un test"
+    2: "Salut je suis un deuxième test"
+    3: "Salut je suis un troisième test"
+
+modes:
+  §d- Faction -:
+    motd: "Serveur Faction du Serveur\nDedans vous y trouvez des exclus"
+    ip: vipernetwork.fr
+    port: 19134
+  §e- SkyBlock -:
+    motd: "Serveur Skyblock du Serveur\nDedans vous y trouvez des exclus"
+    ip: vipernetwork.fr
+    port: 19134
+  §5- Serveur de Merde -:
+    motd: "Vous voulez vraiment vous connectez au serveur de merde qui s'appelle:\n§eAzoria ?"
+    ip: azoria-mc.fr
+    port: 19132
+
+positions:
+  spawn:
+    x: 247
+    y: 66
+    z: 258
+    world: world
+
+areas:
+  spawn:
+    x: [200, 300]
+    y: [30, 80]
+    z: [200, 300]
+    world: world
+
+ffa:
+  position:
+    x: 100
+    y: 60
+    z: 100
+    world: world
+
+bump:
+  x: 2
+  y: 2
+  z: 2
+...
