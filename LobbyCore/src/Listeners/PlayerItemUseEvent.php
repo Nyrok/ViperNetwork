@@ -18,11 +18,8 @@ final class PlayerItemUseEvent implements Listener
     public function onEvent(ClassEvent $event){
         if(LobbyManager::onSpawn($event->getPlayer()->getPosition())){
             match ($event->getItem()->getId()){
-                ItemIds::FEATHER => PlayerUtils::bumpPlume($event->getPlayer()),
-                default => null
+                ItemIds::FEATHER => PlayerUtils::bumpPlume($event->getPlayer())
             };
         }
     }
-
-
 }

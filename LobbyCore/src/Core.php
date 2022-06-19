@@ -19,13 +19,11 @@ class Core extends PluginBase
         $this->saveResource("config.yml", true);
 
         $this->config = new ConfigDatabase();
-
         ListenersManager::initListeners($this);
         HotbarManager::initItems();
 
         $this->getLogger()->warning("[LobbyCore] has been enabled!");
     }
-
 
     public function getConfig(): ConfigDatabase
     {
