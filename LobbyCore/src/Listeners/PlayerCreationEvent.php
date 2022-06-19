@@ -8,8 +8,9 @@ use pocketmine\event\player\PlayerCreationEvent as ClassEvent;
 
 class PlayerCreationEvent implements Listener{
 
-    const NAME = "PlayerCreationEvent";
-
+    /**
+     * @param ClassEvent $event
+     */
     public function onEvent(ClassEvent $event){
         $event->setPlayerClass(ViperPlayer::class);
     }

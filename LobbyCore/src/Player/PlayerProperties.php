@@ -2,7 +2,7 @@
 
 namespace Nyrok\LobbyCore\Player;
 
-use Nyrok\LobbyCore\Trait\PropertiesTrait;
+use UnknowL\Trait\PropertiesTrait;
 
 class PlayerProperties{
     use PropertiesTrait;
@@ -10,7 +10,7 @@ class PlayerProperties{
     public function __construct()
     {
         $this->setBaseProperties([
-            "parameters" => ["cps" => 0],
+            "param" => ["cps" => 0],
         ]);
     }
 

@@ -11,6 +11,7 @@ use pocketmine\player\Player;
 
 abstract class LobbyManager
 {
+
     private static function getX(): array {
         return Core::getInstance()->getConfig()->getNested("areas.spawn.x", [0, 0]);
     }
