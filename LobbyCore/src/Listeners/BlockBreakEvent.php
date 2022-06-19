@@ -2,7 +2,7 @@
 
 namespace Nyrok\LobbyCore\Listeners;
 
-use Nyrok\LobbyCore\Librairies\refaltor\customitemapi\items\CustomPickaxe;
+use Nyrok\LobbyCore\Objects\CustomPickaxe;
 use Nyrok\LobbyCore\Objects\CustomAxe;
 use Nyrok\LobbyCore\Objects\CustomHoe;
 use Nyrok\LobbyCore\Objects\CustomShovel;

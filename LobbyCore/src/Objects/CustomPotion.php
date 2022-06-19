@@ -27,6 +27,7 @@ use pocketmine\entity\Living;
 use pocketmine\item\Food;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
+use pocketmine\item\VanillaItems;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
 use Nyrok\LobbyCore\Traits\UtilsTrait;
@@ -64,7 +65,7 @@ class CustomPotion extends Food
     {
         if (!$consumer instanceof Player) return;
         if ($this->getCount() <= 1) {
-            $consumer->getInventory()->setItemInHand(ItemFactory::air());
+            $consumer->getInventory()->setItemInHand(VanillaItems::AIR());
         }  else $consumer->getInventory()->setItemInHand($this->setCount($this->getCount() - 1));
 
         $food = $consumer->getHungerManager()->getFood();

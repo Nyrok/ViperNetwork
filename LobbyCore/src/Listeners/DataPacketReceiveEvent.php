@@ -2,7 +2,6 @@
 
 namespace Nyrok\LobbyCore\Listeners;
 
-use Nyrok\LobbyCore\Core;
 use Nyrok\LobbyCore\Managers\CustomItemManager;
 use pocketmine\block\BlockFactory;
 use pocketmine\block\BlockLegacyIds;
@@ -13,8 +12,6 @@ use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\server\DataPacketReceiveEvent as ClassEvent;
 use pocketmine\item\Axe;
 use pocketmine\item\Hoe;
-use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
 use pocketmine\item\Pickaxe;
 use pocketmine\item\Shovel;
 use pocketmine\item\Sword;
@@ -26,11 +23,8 @@ use pocketmine\network\mcpe\protocol\types\LevelEvent;
 use pocketmine\network\mcpe\protocol\types\LevelSoundEvent;
 use pocketmine\network\mcpe\protocol\types\PlayerAction;
 use pocketmine\network\mcpe\protocol\types\PlayerBlockActionWithBlockInfo;
-use pocketmine\player\Player;
-use pocketmine\scheduler\ClosureTask;
 use pocketmine\utils\AssumptionFailedError;
 use pocketmine\world\Position;
-use pocketmine\world\sound\ItemBreakSound;
 
 final class DataPacketReceiveEvent implements Listener
 {
@@ -47,21 +41,17 @@ final class DataPacketReceiveEvent implements Listener
             return;
         }
         try {
-
             $actions = $packet->getBlockActions();
             if (is_null($actions)) return;
 
             foreach ($actions as $action) {
                 if (!$action instanceof PlayerBlockActionWithBlockInfo) return;
 
-
                 $player = $event->getOrigin()?->getPlayer() ?: throw new AssumptionFailedError("This packet cannot be received from non-logged in player");
                 $pos = new Vector3($action->getBlockPosition()->getX(), $action->getBlockPosition()->getY(), $action->getBlockPosition()->getZ());
 
-
                 if ($action->getActionType() === PlayerAction::START_BREAK) {
                     $item = $player->getInventory()->getItemInHand();
-
                     if (!in_array($item::class , [
                         Pickaxe::class,
                         Axe::class,
@@ -72,11 +62,9 @@ final class DataPacketReceiveEvent implements Listener
                         return;
                     }
 
-
                     if ($pos->distanceSquared($player->getPosition()) > 10000) {
                         return;
                     }
-
 
                     $target = $player->getWorld()->getBlock($pos);
 
@@ -101,6 +89,7 @@ final class DataPacketReceiveEvent implements Listener
                         $player->getWorld()->setBlock($pos, $frameBlock);
                         return;
                     }
+
                     $block = $target->getSide($action->getFace());
                     if ($block->getId() === BlockLegacyIds::FIRE) {
                         $player->getWorld()->setBlock($block->getPosition(), BlockFactory::getInstance()->get(BlockLegacyIds::AIR, 0));

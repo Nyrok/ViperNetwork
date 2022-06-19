@@ -14,6 +14,11 @@ class Core extends PluginBase
 
     private ConfigDatabase $config;
 
+    protected function onLoad(): void
+    {
+        CustomItemManager::initCustomItems();
+    }
+
     protected function onEnable(): void
     {
         $this::setInstance($this);
@@ -23,7 +28,7 @@ class Core extends PluginBase
 
         ListenersManager::initListeners($this);
         HotbarManager::initItems();
-        CustomItemManager::initCustomItems();
+        CustomItemManager::registerItems();
 
         $this->getLogger()->warning("[LobbyCore] has been enabled!");
     }

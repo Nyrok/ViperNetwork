@@ -2,6 +2,7 @@
 
 namespace Nyrok\LobbyCore\Managers;
 
+use Nyrok\LobbyCore\Items\CookieSpeed;
 use Exception;
 use Nyrok\LobbyCore\Core;
 use Nyrok\LobbyCore\Objects\CustomFood;
@@ -44,8 +45,15 @@ abstract class CustomItemManager
     public static ?ItemComponentPacket $packet = null;
 
     public static function initCustomItems(): void {
-        self::register(new CustomFood(new ItemIdentifier(1000, 0), "Lol", "textures/items/apple", true, 4, 3, 2));
-        self::registerItems();
+        self::register(new CookieSpeed(
+            new ItemIdentifier(1002, 0),
+            "cookie_de_speed",
+            "apple",
+            true,
+            1,
+            15.0,
+            1)
+        );
     }
 
     public static function registerItems()
@@ -142,5 +150,9 @@ abstract class CustomItemManager
         $handler->cancel();
         $player->getWorld()->broadcastPacketToViewers($pos, LevelEventPacket::create(LevelEvent::BLOCK_STOP_BREAK, 1, $pos->asVector3()));
         unset(self::$handlers[$player->getName()][self::blockHash($pos)]);
+    }
+
+    public static function getPacket(): ?ItemComponentPacket {
+        return self::$packet;
     }
 }
