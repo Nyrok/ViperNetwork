@@ -36,9 +36,10 @@ abstract class PlayerUtils
      */
     public static function bumpPlume(Player $player): void {
         $motion = $player->getMotion();
-        $motion->x += (float)Core::getInstance()->getConfig()->getNested("bump.x", 1);
-        $motion->y += (float)Core::getInstance()->getConfig()->getNested("bump.y", 1);
-        $motion->z += (float)Core::getInstance()->getConfig()->getNested("bump.z", 1);
+        $vector = $player->getDirectionVector();
+        $motion->x += $vector->x * (float)Core::getInstance()->getConfig()->getNested("bump.x", 1.0);
+        $motion->y += (float)Core::getInstance()->getConfig()->getNested("bump.y", 1.0);
+        $motion->z += $vector->z * (float)Core::getInstance()->getConfig()->getNested("bump.z", 1.0);
         $player->setMotion($motion);
     }
 

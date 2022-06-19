@@ -5,7 +5,6 @@ namespace Nyrok\LobbyCore\Managers;
 use Nyrok\LobbyCore\Items\CookieSpeed;
 use Exception;
 use Nyrok\LobbyCore\Core;
-use Nyrok\LobbyCore\Objects\CustomFood;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
@@ -102,7 +101,7 @@ abstract class CustomItemManager
         foreach ($item as $i) {
             try {
                 self::$items[] = $i;
-            } catch (Exception $exception) {
+            } catch (Exception) {
                 Core::getInstance()->getLogger()->error("[!] ". $item::class ." Is not custom item.");
             }
         }
