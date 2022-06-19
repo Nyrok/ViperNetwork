@@ -24,15 +24,13 @@ declare(strict_types=1);
 namespace Nyrok\LobbyCore\Objects;
 
 use pocketmine\item\ItemIdentifier;
-use pocketmine\item\Shovel;
 use pocketmine\item\Sword;
 use pocketmine\item\ToolTier;
 use pocketmine\nbt\tag\CompoundTag;
-use Nyrok\LobbyCore\Librairies\refaltor\customitemapi\traits\UtilsTrait;
+use Nyrok\LobbyCore\Traits\UtilsTrait;
 
 class CustomSword extends Sword
 {
-
     use UtilsTrait;
 
     private string $textureName;

@@ -2,6 +2,7 @@
 namespace Nyrok\LobbyCore;
 
 use Nyrok\LobbyCore\Databases\ConfigDatabase;
+use Nyrok\LobbyCore\Managers\CustomItemManager;
 use Nyrok\LobbyCore\Managers\HotbarManager;
 use Nyrok\LobbyCore\Managers\ListenersManager;
 use pocketmine\plugin\PluginBase;
@@ -22,6 +23,7 @@ class Core extends PluginBase
 
         ListenersManager::initListeners($this);
         HotbarManager::initItems();
+        CustomItemManager::initCustomItems();
 
         $this->getLogger()->warning("[LobbyCore] has been enabled!");
     }

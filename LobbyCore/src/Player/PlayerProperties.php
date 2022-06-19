@@ -2,9 +2,9 @@
 
 namespace Nyrok\LobbyCore\Player;
 
-use UnknowL\Trait\PropertiesTrait;
+use Nyrok\LobbyCore\Traits\PropertiesTrait;
 
-final class PlayerProperties{
+final class PlayerProperties {
     use PropertiesTrait;
 
     public function __construct()

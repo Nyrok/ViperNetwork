@@ -29,7 +29,7 @@ use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
-use Nyrok\LobbyCore\Librairies\refaltor\customitemapi\traits\UtilsTrait;
+use Nyrok\LobbyCore\Traits\UtilsTrait;
 
 class CustomFood extends Food
 {

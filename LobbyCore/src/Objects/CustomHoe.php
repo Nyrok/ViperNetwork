@@ -27,11 +27,10 @@ use pocketmine\item\Hoe;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\ToolTier;
 use pocketmine\nbt\tag\CompoundTag;
-use Nyrok\LobbyCore\Librairies\refaltor\customitemapi\traits\UtilsTrait;
+use Nyrok\LobbyCore\Traits\UtilsTrait;
 
 class CustomHoe extends Hoe
 {
-
     use UtilsTrait;
 
     private string $textureName;

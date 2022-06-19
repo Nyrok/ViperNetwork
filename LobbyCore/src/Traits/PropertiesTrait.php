@@ -1,6 +1,8 @@
 <?php
 
-namespace UnknowL\Trait;
+namespace Nyrok\LobbyCore\Traits;
+
+use InvalidArgumentException;
 
 trait PropertiesTrait
 {
@@ -31,7 +33,7 @@ trait PropertiesTrait
             try {
                 $array = $array[$ex[$count - 1]];
                 var_dump($array);
-            } catch (\InvalidArgumentException $e) {
+            } catch (InvalidArgumentException $e) {
                 $this->getNestedProperties($name, $array);
             }
         }

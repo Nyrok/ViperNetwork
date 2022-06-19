@@ -27,7 +27,7 @@ use pocketmine\item\ItemIdentifier;
 use pocketmine\item\Shovel;
 use pocketmine\item\ToolTier;
 use pocketmine\nbt\tag\CompoundTag;
-use Nyrok\LobbyCore\Librairies\refaltor\customitemapi\traits\UtilsTrait;
+use Nyrok\LobbyCore\Traits\UtilsTrait;
 
 class CustomShovel extends Shovel
 {

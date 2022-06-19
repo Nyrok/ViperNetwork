@@ -4,9 +4,11 @@ namespace Nyrok\LobbyCore\Managers;
 
 use Exception;
 use Nyrok\LobbyCore\Core;
+use Nyrok\LobbyCore\Objects\CustomFood;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
+use pocketmine\item\ItemIdentifier;
 use pocketmine\item\StringToItemParser;
 use pocketmine\item\VanillaItems;
 use pocketmine\network\mcpe\convert\GlobalItemTypeDictionary;
@@ -26,7 +28,7 @@ use ReflectionClass;
 use Webmozart\PathUtil\Path;
 use const pocketmine\BEDROCK_DATA_PATH;
 
-class CustomItemManager
+abstract class CustomItemManager
 {
     const SCRIPTING = "scripting";
     const UPCOMING_CREATOR_FEATURES = "upcoming_creator_features";
@@ -41,7 +43,12 @@ class CustomItemManager
     public static array $handlers = [];
     public static ?ItemComponentPacket $packet = null;
 
-    public static function initCustomItems()
+    public static function initCustomItems(): void {
+        self::register(new CustomFood(new ItemIdentifier(1000, 0), "Test", "apple", true, 4, 3, 2));
+        self::registerItems();
+    }
+
+    public static function registerItems()
     {
         CreativeInventory::getInstance()->clear();
         $ref = new ReflectionClass(ItemTranslator::class);

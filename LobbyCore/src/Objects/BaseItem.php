@@ -27,7 +27,7 @@ namespace Nyrok\LobbyCore\Objects;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\nbt\tag\CompoundTag;
-use Nyrok\LobbyCore\Librairies\refaltor\customitemapi\traits\UtilsTrait;
+use Nyrok\LobbyCore\Traits\UtilsTrait;
 
 class BaseItem extends Item
 {
