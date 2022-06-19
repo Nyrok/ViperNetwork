@@ -22,7 +22,7 @@
 declare(strict_types=1);
 
 
-namespace Nyrok\LobbyCore\Librairies\refaltor\customitemapi\items;
+namespace Nyrok\LobbyCore\Objects;
 
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;

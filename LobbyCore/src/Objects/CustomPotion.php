@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace Nyrok\LobbyCore\Librairies\refaltor\customitemapi\items;
+namespace Nyrok\LobbyCore\Objects;
 
 use pocketmine\entity\Living;
 use pocketmine\item\Food;

@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace Nyrok\LobbyCore\Librairies\refaltor\customitemapi\items;
+namespace Nyrok\LobbyCore\Objects;
 
 use pocketmine\item\Armor;
 use pocketmine\item\ArmorTypeInfo;
@@ -31,12 +31,9 @@ use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
 use pocketmine\Server;
-use Nyrok\LobbyCore\Librairies\refaltor\customitemapi\traits\UtilsTrait;
 
 class CustomArmor extends Armor
 {
-
-    use UtilsTrait;
 
     protected $lore  = [''];
 
