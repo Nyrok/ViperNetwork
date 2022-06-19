@@ -44,7 +44,7 @@ abstract class CustomItemManager
     public static ?ItemComponentPacket $packet = null;
 
     public static function initCustomItems(): void {
-        self::register(new CustomFood(new ItemIdentifier(1000, 0), "Test", "apple", true, 4, 3, 2));
+        self::register(new CustomFood(new ItemIdentifier(1000, 0), "Lol", "textures/items/apple", true, 4, 3, 2));
         self::registerItems();
     }
 

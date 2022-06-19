@@ -4,6 +4,7 @@ namespace Nyrok\LobbyCore\Managers;
 
 use JetBrains\PhpStorm\Pure;
 use Nyrok\LobbyCore\Core;
+use Nyrok\LobbyCore\Listeners\BlockBreakEvent;
 use Nyrok\LobbyCore\Listeners\DataPacketReceiveEvent;
 use Nyrok\LobbyCore\Listeners\DataPacketSendEvent;
 use Nyrok\LobbyCore\Listeners\PlayerCreationEvent;
@@ -30,6 +31,7 @@ abstract class ListenersManager
             new DataPacketSendEvent(),
             new PlayerQuitEvent(),
             new PlayerCreationEvent(),
+            new BlockBreakEvent(),
         ];
     }
 

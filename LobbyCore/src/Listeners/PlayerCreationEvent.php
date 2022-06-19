@@ -6,7 +6,9 @@ use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerCreationEvent as ClassEvent;
 
-class PlayerCreationEvent implements Listener{
+final class PlayerCreationEvent implements Listener{
+
+    const NAME = "PlayerCreationEvent";
 
     /**
      * @param ClassEvent $event
