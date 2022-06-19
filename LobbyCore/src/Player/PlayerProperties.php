@@ -4,7 +4,7 @@ namespace Nyrok\LobbyCore\Player;
 
 use UnknowL\Trait\PropertiesTrait;
 
-class PlayerProperties{
+final class PlayerProperties{
     use PropertiesTrait;
 
     public function __construct()
