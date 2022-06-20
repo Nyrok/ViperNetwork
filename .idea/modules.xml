@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$USER_HOME$/Downloads/CustomItemAPI-main/.idea/CustomItemAPI.iml" filepath="$USER_HOME$/Downloads/CustomItemAPI-main/.idea/CustomItemAPI.iml" />
       <module fileurl="file://$USER_HOME$/Downloads/CustomItemAPI-main/.idea/CustomItemAPI-main.iml" filepath="$USER_HOME$/Downloads/CustomItemAPI-main/.idea/CustomItemAPI-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Quazar/QuazarCore/.idea/QuazarCore.iml" filepath="$PROJECT_DIR$/../Quazar/QuazarCore/.idea/QuazarCore.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ViperNetwork.iml" filepath="$PROJECT_DIR$/.idea/ViperNetwork.iml" />
     </modules>
   </component>

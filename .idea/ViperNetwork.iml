@@ -8,5 +8,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="CustomItemAPI-main" />
     <orderEntry type="module" module-name="CustomItemAPI" />
+    <orderEntry type="module" module-name="QuazarCore" />
   </component>
 </module>
