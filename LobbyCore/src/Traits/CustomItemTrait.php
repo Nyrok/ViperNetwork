@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace Nyrok\LobbyCore\Traits;
 
-trait UtilsTrait
+trait CustomItemTrait
 {
     public function getRuntimeId(int $id): int {
         return $id + ($id > 0 ? 5000 : -5000);
