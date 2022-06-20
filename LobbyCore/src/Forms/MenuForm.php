@@ -8,6 +8,7 @@ use Closure;
 use Nyrok\LobbyCore\Forms\menu\Button;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Immutable;
+use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\form\FormValidationException;
 use pocketmine\player\Player;
 use pocketmine\utils\Utils;
@@ -31,11 +32,11 @@ class MenuForm extends BaseForm{
 	){
 		if($onSubmit !== null){
 			/** @phpstan-ignore-next-line */
-			Utils::validateCallableSignature(function(Player $player, Button $selected){ }, $onSubmit);
+			Utils::validateCallableSignature(function(ViperPlayer $player, Button $selected){ }, $onSubmit);
 		}
 		if($onClose !== null){
 			/** @phpstan-ignore-next-line */
-			Utils::validateCallableSignature(function(Player $player){ }, $onClose);
+			Utils::validateCallableSignature(function(ViperPlayer $player){ }, $onClose);
 		}
 		parent::__construct($title);
 	}

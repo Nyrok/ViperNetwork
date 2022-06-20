@@ -5,6 +5,7 @@ use Nyrok\LobbyCore\Databases\ConfigDatabase;
 use Nyrok\LobbyCore\Managers\CustomItemManager;
 use Nyrok\LobbyCore\Managers\HotbarManager;
 use Nyrok\LobbyCore\Managers\ListenersManager;
+use pocketmine\block\BlockBreakInfo;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 

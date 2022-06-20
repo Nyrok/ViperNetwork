@@ -3,6 +3,7 @@
 namespace Nyrok\LobbyCore\Listeners;
 
 use Nyrok\LobbyCore\Managers\LobbyManager;
+use Nyrok\LobbyCore\Player\ViperPlayer;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent as ClassEvent;
@@ -17,14 +18,17 @@ final class PlayerInteractEvent implements Listener
      * @param ClassEvent $event
      */
     public function onEvent(ClassEvent $event){
-        if(LobbyManager::onSpawn($event->getPlayer()->getPosition())){
-            switch ($event->getItem()->getId()){
-                case ItemIds::DIAMOND_SWORD:
-                    PlayerUtils::teleportToFFA($event->getPlayer());
-                    break;
-                case ItemIds::COMPASS:
-                    LobbyManager::modesForm($event->getPlayer());
-                    break;
+        $player = $event->getPlayer();
+        if($player instanceof ViperPlayer){
+            if(LobbyManager::onSpawn($event->getPlayer()->getPosition())){
+                switch ($event->getItem()->getId()){
+                    case ItemIds::DIAMOND_SWORD:
+                        PlayerUtils::teleportToFFA($player);
+                        break;
+                    case ItemIds::COMPASS:
+                        LobbyManager::modesForm($player);
+                        break;
+                }
             }
         }
     }

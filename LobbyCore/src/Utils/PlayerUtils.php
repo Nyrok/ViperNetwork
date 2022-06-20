@@ -3,22 +3,25 @@ namespace Nyrok\LobbyCore\Utils;
 
 use Nyrok\LobbyCore\Core;
 use Nyrok\LobbyCore\Managers\LobbyManager;
+use Nyrok\LobbyCore\Player\ViperPlayer;
+use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\nbt\tag\ListTag;
 use pocketmine\player\Player;
 use pocketmine\world\Position;
 
 abstract class PlayerUtils
 {
     /**
-     * @param Player $player
+     * @param ViperPlayer $player
      */
-    public static function teleportToSpawn(Player $player): void {
+    public static function teleportToSpawn(ViperPlayer $player): void {
         $player->teleport(LobbyManager::getSpawnPosition());
     }
 
     /**
-     * @param Player $player
+     * @param ViperPlayer $player
      */
-    public static function teleportToFFA(Player $player): void {
+    public static function teleportToFFA(ViperPlayer $player): void {
         $player->teleport(self::getFFAPosition());
     }
 
@@ -32,9 +35,9 @@ abstract class PlayerUtils
     }
 
     /**
-     * @param Player $player
+     * @param ViperPlayer $player
      */
-    public static function bumpPlume(Player $player): void {
+    public static function bumpPlume(ViperPlayer $player): void {
         $motion = $player->getMotion();
         $vector = $player->getDirectionVector();
         $motion->x += $vector->x * (float)Core::getInstance()->getConfig()->getNested("bump.x", 1.0);
@@ -43,4 +46,23 @@ abstract class PlayerUtils
         $player->setMotion($motion);
     }
 
+    public static function valueToTag(string $property, string $value, CompoundTag $nbt): CompoundTag{
+        return match (gettype($value)){
+            "integer" => $nbt->setInt($property, $value),
+            "double" => $nbt->setDouble($property, $value),
+            "string" => $nbt->setString($property, $value),
+            "boolean" => $nbt->setByte($property, $value),
+            "array" => $nbt->setTag($property, new ListTag(self::arraytoTag([$property => $value]))),
+        };
+    }
+
+    public static function arraytoTag(array $array): array{
+        $tag = [];
+        for($count = count($array); $count > 0; $count--){
+            if (is_array($array[$count])){
+                self::arraytoTag($array);
+            }
+        }
+        return $tag;
+    }
 }
