@@ -2,6 +2,7 @@
 
 namespace Nyrok\LobbyCore\Managers;
 
+use Nyrok\LobbyCore\Items\CookieForce;
 use Nyrok\LobbyCore\Items\CookieSpeed;
 use Exception;
 use Nyrok\LobbyCore\Core;
@@ -44,14 +45,9 @@ abstract class CustomItemManager
     public static ?ItemComponentPacket $packet = null;
 
     public static function initCustomItems(): void {
-        self::register(new CookieSpeed(
-            new ItemIdentifier(1002, 0),
-            "cookie_de_speed",
-            "apple",
-            true,
-            1,
-            15.0,
-            1)
+        self::register(
+            new CookieSpeed(new ItemIdentifier(CookieSpeed::ID, 0), "cookie_de_speed", "cookie", true, 1, 0.5, 1),
+            new CookieForce(new ItemIdentifier(CookieForce::ID, 0), "cookie_de_force", "cookie", true, 1, 0.5, 1)
         );
     }
 
@@ -85,6 +81,7 @@ abstract class CustomItemManager
             $coreToNetMap->setValue(ItemTranslator::getInstance(), $coreToNetValues);
             $itemTypeMap->setValue(GlobalItemTypeDictionary::getInstance()->getDictionary(), $itemTypeEntries);
             self::$packet = ItemComponentPacket::create(self::$packetEntries);
+            Core::getInstance()->getLogger()->notice("[ITEMS] Custom Item: {$item->getName()} ({$item->getId()}) Loaded");
         }
 
         $creativeItems = json_decode(file_get_contents(Path::join(BEDROCK_DATA_PATH, "creativeitems.json")), true);
