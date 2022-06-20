@@ -2,6 +2,7 @@
 namespace Nyrok\LobbyCore\Managers;
 
 use Nyrok\LobbyCore\Core;
+use Nyrok\LobbyCore\Player\ViperPlayer;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
@@ -45,7 +46,7 @@ abstract class HotbarManager
         return self::$items;
     }
 
-    public static function load(Player $player){
+    public static function load(ViperPlayer $player){
         $player->getEffects()->clear();
         $player->getArmorInventory()->clearAll();
         $player->getInventory()->clearAll();

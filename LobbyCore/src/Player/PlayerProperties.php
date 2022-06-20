@@ -10,8 +10,10 @@ final class PlayerProperties {
     public function __construct()
     {
         $this->setBaseProperties([
-            "param" => ["cps" => 0],
-        ]);
+            "parameters" => [
+                "cps" => 0,
+                "reach" => 0,
+                "combo" => 0,
+            ]]);
     }
-
 }

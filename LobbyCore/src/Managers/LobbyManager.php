@@ -6,6 +6,7 @@ use Nyrok\LobbyCore\Core;
 use Nyrok\LobbyCore\Forms\menu\Button;
 use Nyrok\LobbyCore\Forms\MenuForm;
 use Nyrok\LobbyCore\Forms\ModalForm;
+use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\world\Position;
 use pocketmine\player\Player;
 
@@ -54,9 +55,9 @@ abstract class LobbyManager
             ($position->z >= self::getMinZ() and $position->z <= self::getMaxZ());
     }
 
-    public static function modesForm(Player $player): void
+    public static function modesForm(ViperPlayer $player): void
     {
-        $form = new MenuForm("Modes de Jeu", "Choisissez votre mode de jeu", [], function (Player $player, Button $selected): void {
+        $form = new MenuForm("Modes de Jeu", "Choisissez votre mode de jeu", [], function (ViperPlayer $player, Button $selected): void {
             $mode = Core::getInstance()->getConfig()->getNested("modes.$selected->text", []);
             self::confirmModeForm($player, $selected->text, $mode);
         }, null);
@@ -66,8 +67,8 @@ abstract class LobbyManager
         $player->sendForm($form);
     }
 
-    private static function confirmModeForm(Player $player, string $name, array $mode){
-        $form = new ModalForm($name, $mode['motd'], function (Player $player, bool $choice) use ($mode): void {
+    private static function confirmModeForm(ViperPlayer $player, string $name, array $mode){
+        $form = new ModalForm($name, $mode['motd'], function (ViperPlayer $player, bool $choice) use ($mode): void {
             match ($choice){
                 true => $player->transfer($mode['ip'], $mode['port'], "Transfère"),
                 false => self::modesForm($player)
