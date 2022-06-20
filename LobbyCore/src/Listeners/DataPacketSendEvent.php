@@ -60,5 +60,4 @@ final class DataPacketSendEvent implements Listener
             }
         }
     }
-
 }
