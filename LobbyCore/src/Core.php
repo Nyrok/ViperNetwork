@@ -39,4 +39,7 @@ class Core extends PluginBase
         return $this->config;
     }
 
+    public function getPrefix(): string {
+        return $this->config->get('prefix', "");
+    }
 }

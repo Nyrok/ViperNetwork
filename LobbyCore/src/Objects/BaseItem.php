@@ -27,11 +27,11 @@ namespace Nyrok\LobbyCore\Objects;
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\nbt\tag\CompoundTag;
-use Nyrok\LobbyCore\Traits\UtilsTrait;
+use Nyrok\LobbyCore\Traits\CustomItemTrait;
 
 class BaseItem extends Item
 {
-    use UtilsTrait;
+    use CustomItemTrait;
 
     private string $textureName;
     private int $maxStackSize;

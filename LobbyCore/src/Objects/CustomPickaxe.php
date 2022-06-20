@@ -27,12 +27,12 @@ use pocketmine\item\ItemIdentifier;
 use pocketmine\item\Pickaxe;
 use pocketmine\item\ToolTier;
 use pocketmine\nbt\tag\CompoundTag;
-use Nyrok\LobbyCore\Traits\UtilsTrait;
+use Nyrok\LobbyCore\Traits\CustomItemTrait;
 
 class CustomPickaxe extends Pickaxe
 {
 
-    use UtilsTrait;
+    use CustomItemTrait;
 
     private string $textureName;
     private float $miningSpeed;

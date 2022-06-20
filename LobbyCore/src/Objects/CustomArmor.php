@@ -31,11 +31,11 @@ use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
 use pocketmine\Server;
-use Nyrok\LobbyCore\Traits\UtilsTrait;
+use Nyrok\LobbyCore\Traits\CustomItemTrait;
 
 class CustomArmor extends Armor
 {
-    use UtilsTrait;
+    use CustomItemTrait;
 
     protected $lore  = [''];
 

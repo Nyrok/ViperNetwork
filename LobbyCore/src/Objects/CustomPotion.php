@@ -30,11 +30,11 @@ use pocketmine\item\ItemIdentifier;
 use pocketmine\item\VanillaItems;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
-use Nyrok\LobbyCore\Traits\UtilsTrait;
+use Nyrok\LobbyCore\Traits\CustomItemTrait;
 
 class CustomPotion extends Food
 {
-    use UtilsTrait;
+    use CustomItemTrait;
 
     private bool $canAlwaysEat;
     private int $foodRestore;
