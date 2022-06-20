@@ -6,11 +6,16 @@ use Nyrok\LobbyCore\Items\CookieForce;
 use Nyrok\LobbyCore\Items\CookieSpeed;
 use Exception;
 use Nyrok\LobbyCore\Core;
+use Nyrok\LobbyCore\Objects\CustomArmor;
+use Nyrok\LobbyCore\Objects\CustomSword;
+use pocketmine\inventory\ArmorInventory;
 use pocketmine\inventory\CreativeInventory;
+use pocketmine\item\ArmorTypeInfo;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\StringToItemParser;
+use pocketmine\item\ToolTier;
 use pocketmine\item\VanillaItems;
 use pocketmine\network\mcpe\convert\GlobalItemTypeDictionary;
 use pocketmine\network\mcpe\convert\ItemTranslator;
@@ -46,8 +51,19 @@ abstract class CustomItemManager
 
     public static function initCustomItems(): void {
         self::register(
+            // Cookies
             new CookieSpeed(new ItemIdentifier(CookieSpeed::ID, 0), "cookie_de_speed", "cookie", true, 1, 0.5, 1),
-            new CookieForce(new ItemIdentifier(CookieForce::ID, 0), "cookie_de_force", "cookie", true, 1, 0.5, 1)
+            new CookieForce(new ItemIdentifier(CookieForce::ID, 0), "cookie_de_force", "cookie", true, 1, 0.5, 1),
+
+            // Armure en Emeraude
+            new CustomArmor(new ItemIdentifier(ArmorsManager::EMERALD_HELMET, 0), "emerald_helmet", new ArmorTypeInfo(10, 1000, ArmorInventory::SLOT_HEAD), "empty_armor_slot_helmet","diamond"),
+            new CustomArmor(new ItemIdentifier(ArmorsManager::EMERALD_CHESTPLATE, 0), "emerald_chestplate", new ArmorTypeInfo(10, 1000, ArmorInventory::SLOT_CHEST), "empty_armor_slot_chestplate","diamond"),
+            new CustomArmor(new ItemIdentifier(ArmorsManager::EMERALD_LEGGINGS, 0), "emerald_leggings", new ArmorTypeInfo(10, 1000, ArmorInventory::SLOT_LEGS), "empty_armor_slot_leggings","diamond"),
+            new CustomArmor(new ItemIdentifier(ArmorsManager::EMERALD_BOOTS, 0), "emerald_boots", new ArmorTypeInfo(10, 1000, ArmorInventory::SLOT_FEET), "empty_armor_slot_boots","diamond"),
+
+            // Epée en Emeraude
+            new CustomSword(new ItemIdentifier(ArmorsManager::EMERALD_SWORD, 0), "emerald_sword", ToolTier::DIAMOND(), "stick", 1000, 10),
+
         );
     }
 
