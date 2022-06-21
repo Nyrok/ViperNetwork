@@ -3,10 +3,9 @@
 namespace Nyrok\LobbyCore\Player;
 
 use Nyrok\LobbyCore\Managers\UiManager;
+use Nyrok\LobbyCore\Utils\PlayerUtils;
 use pocketmine\lang\Translatable;
-use pocketmine\nbt\tag\ByteArrayTag;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\nbt\tag\ListTag;
 use pocketmine\player\Player;
 
 final class ViperPlayer extends Player{
@@ -43,8 +42,7 @@ final class ViperPlayer extends Player{
         $properties = $this->properties;
         $properties->normalize($properties->getProperties("parameters"));
         foreach ($properties->getProperties("parameters") as $key => $value){
-            if (!(is_bool($value) && $value === false)){
-                var_dump($value);
+            if (is_numeric($value)){
                 $message .= $key . " : " . $value . " ┆ ";
             }
         }
@@ -55,13 +53,7 @@ final class ViperPlayer extends Player{
     {
         $nbt = $this->getNBT();
         foreach ($this->properties->getPropertiesList() as $property => $value){
-            match (gettype($value)){
-                "integer" => $nbt->setInt($property, $value),
-                "double" => $nbt->setDouble($property, $value),
-                "string" => $nbt->setString($property, $value),
-                "boolean" => $nbt->setByte($property, $value),
-                "array" => $nbt->setTag($property, ),
-            };
+            PlayerUtils::valueToTag($property, $value, $nbt);
         }
         parent::disconnect($reason, $quitMessage);
     }

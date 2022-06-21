@@ -26,6 +26,6 @@ final class PlayerItemUseEvent implements Listener
                     default => null
                 };
             }
-        }
+       }
     }
 }
