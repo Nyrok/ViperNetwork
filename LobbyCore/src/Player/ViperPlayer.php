@@ -2,7 +2,6 @@
 
 namespace Nyrok\LobbyCore\Player;
 
-use Nyrok\LobbyCore\Managers\FormsManager;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
 use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
@@ -15,13 +14,10 @@ final class ViperPlayer extends Player{
 
     private PlayerProperties $properties;
 
-    public FormsManager $uiManager;
-
     private CompoundTag $tag;
 
     public function initEntity(CompoundTag $nbt): void
     {
-        $this->uiManager = new FormsManager($this);
         $this->tag = $nbt;
         $this->initPlayerClickData();
         $this->properties = new PlayerProperties();
