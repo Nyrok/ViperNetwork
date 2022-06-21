@@ -13,7 +13,7 @@ trait PropertiesTrait
 
     public function normalize(array $properties): void{
         foreach($properties as $name => $value){
-            if($value === true){
+            if(!is_numeric($value) && $value === true){
                 $this->properties[$name] = 0;
             }
         }

@@ -2,28 +2,26 @@
 
 namespace Nyrok\LobbyCore\Managers;
 
-use Nyrok\LobbyCore\Forms\menu\Button;
-use Nyrok\LobbyCore\Forms\MenuForm;
+use Nyrok\LobbyCore\Forms\CustomForm;
+use Nyrok\LobbyCore\Forms\CustomFormResponse;
+use Nyrok\LobbyCore\Forms\element\Toggle;
 use Nyrok\LobbyCore\Player\ViperPlayer;
-use pocketmine\form\Form;
-use pocketmine\player\Player;
 
 abstract class FormsManager{
 
-    public function __construct(public ViperPlayer $player){}
+    public function __construct(){}
 
-    public function parametersUI(): void
+    public static function parametersUI(ViperPlayer $player): void
     {
-        $form = MenuForm::withOptions("Paramètres", "", array_keys($this->player->getPlayerProperties()->getProperties("parameters")), function (ViperPlayer $player, Button $button){
-            $form = MenuForm::withOptions($button->text, "", ["Activer", "Désactiver"], function (ViperPlayer $player, Button $selected) use ($button) {
-                if($selected->text === "Activer"){
-                    $player->getPlayerProperties()->setNestedProperties("parameters.".$button->text, true);
-                }else{
-                    $player->getPlayerProperties()->setNestedProperties("parameters.".$button->text, false);
-                }
-            });
-            $player->sendForm($form);
+        $elements =  [];
+        foreach ($player->getPlayerProperties()->getProperties("parameters") as $name => $value){
+            $elements[] = new Toggle(ucfirst($name), is_numeric($value));
+        }
+        $form = new CustomForm("Paramètres",$elements, function (ViperPlayer $player, CustomFormResponse $response){
+            $toogle = $response->getToggle();
+            var_dump($toogle->text, $toogle->getValue());
+            $player->getPlayerProperties()->setNestedProperties("parameters.".strtolower($toogle->text), $toogle->getValue());
         });
-        $this->player->sendForm($form);
+        $player->sendForm($form);
     }
 }

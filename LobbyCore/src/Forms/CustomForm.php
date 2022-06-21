@@ -8,6 +8,7 @@ use Closure;
 use JetBrains\PhpStorm\ArrayShape;
 use Nyrok\LobbyCore\Forms\element\BaseElement;
 use JetBrains\PhpStorm\Immutable;
+use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\form\FormValidationException;
 use pocketmine\player\Player;
 use pocketmine\utils\Utils;
@@ -20,7 +21,7 @@ class CustomForm extends BaseForm{
 
 	/**
 	 * @phpstan-param list<BaseElement&element\BaseElementWithValue<mixed>> $elements
-	 * @phpstan-param Closure(Player, CustomFormResponse) : mixed $onSubmit
+	 * @phpstan-param Closure(ViperPlayer, CustomFormResponse) : mixed $onSubmit
 	 * @phpstan-param (\Closure(Player) : mixed)|null $onClose
 	 */
 	public function __construct(
@@ -30,10 +31,10 @@ class CustomForm extends BaseForm{
 		#[Immutable] private /*readonly*/ ?Closure $onClose = null,
 	){
 		/** @phpstan-ignore-next-line */
-		Utils::validateCallableSignature(function(Player $player, CustomFormResponse $response){ }, $onSubmit);
+		Utils::validateCallableSignature(function(ViperPlayer $player, CustomFormResponse $response){ }, $onSubmit);
 		if($onClose !== null){
 			/** @phpstan-ignore-next-line */
-			Utils::validateCallableSignature(function(Player $player){ }, $onClose);
+			Utils::validateCallableSignature(function(ViperPlayer $player){ }, $onClose);
 		}
 		parent::__construct($title);
 	}
