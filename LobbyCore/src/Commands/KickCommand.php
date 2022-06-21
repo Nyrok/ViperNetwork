@@ -2,27 +2,35 @@
 
 namespace Nyrok\LobbyCore\Commands;
 
-use Nyrok\SnowMoon\Provider\LanguageProvider;
-use Nyrok\SnowMoon\Provider\PlayerProvider;
+use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\command\CommandSender;
-use pocketmine\player\Player;
+use pocketmine\lang\Translatable;
 
 final class KickCommand extends ViperCommands
 {
+    protected const NAME = "kick";
+
+    public function __construct(string $name = self::NAME, Translatable|string $description = "", Translatable|string|null $usageMessage = null, array $aliases = [])
+    {
+        parent::__construct($name, $description, $usageMessage, $aliases);
+    }
+
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if(isset($args[0])) {
             $player = $this->getOwningPlugin()->getServer()->getPlayer($args[0]);
             $reason = isset($args[1]) ? implode(" ", array_slice($args, 1)) : "Aucune raison donnée.";
-            if($player) {
-                $player->kick(str_replace(["{staff}", "{reason}"], [$sender->getName(), $reason], LanguageProvider::getLanguageMessage("messages.success.kick", $sender instanceof Player ? PlayerProvider::toCustomPlayer($sender) : null, true)), false);
-                $sender->sendMessage(str_replace(["{player}"], [$player->getName()], LanguageProvider::getLanguageMessage("messages.success.kick", $sender instanceof Player ? PlayerProvider::toCustomPlayer($sender) : null, true)));
+$sender_language = $this->getSenderLanguage($sender);
+            if($player instanceof ViperPlayer) {
+                $player->kick($reason);
+                $player->getLanguage()->getMessage("messages.kick.kicked", ["{player}" => $sender->getName(), "{reason}" => $reason])->send($player);
+                $sender_language?->getMessage("messages.kick.kicker", ["{player}" => $player->getName(), "{reason}" => $reason])->send($sender);
             } else {
-                $sender->sendMessage(LanguageProvider::getLanguageMessage("messages.errors.player-not-found", $sender instanceof Player ? PlayerProvider::toCustomPlayer($sender) : null, true));
+                $sender_language->getMessage("messages.player.not-found")->send($sender);
             }
         }
         else {
-            $sender->sendMessage(LanguageProvider::getPrefix().$this->getUsage());
+            $sender->sendMessage($this->getUsage());
         }
     }
 }

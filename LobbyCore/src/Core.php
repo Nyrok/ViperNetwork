@@ -2,8 +2,10 @@
 namespace Nyrok\LobbyCore;
 
 use Nyrok\LobbyCore\Databases\ConfigDatabase;
+use Nyrok\LobbyCore\Managers\CommandsManager;
 use Nyrok\LobbyCore\Managers\CustomItemManager;
 use Nyrok\LobbyCore\Managers\HotbarManager;
+use Nyrok\LobbyCore\Managers\LanguageManager;
 use Nyrok\LobbyCore\Managers\ListenersManager;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
@@ -29,6 +31,8 @@ class Core extends PluginBase
         ListenersManager::initListeners($this);
         HotbarManager::initItems();
         CustomItemManager::registerItems();
+        CommandsManager::initCommands();
+        LanguageManager::initLanguages();
 
         $this->getLogger()->warning("[LobbyCore] has been enabled!");
     }
@@ -37,9 +41,5 @@ class Core extends PluginBase
     public function getConfig(): ConfigDatabase
     {
         return $this->config;
-    }
-
-    public function getPrefix(): string {
-        return $this->config->get('prefix', "");
     }
 }

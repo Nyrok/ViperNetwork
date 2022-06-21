@@ -1,5 +1,60 @@
 ---
-commands: []
+
+prefix: "§d[§5ViperNetwork§d] "
+
+languages:
+  - "fr_FR"
+
+commands:
+  rekit:
+    description: Se rekit
+    aliases: [ ]
+    permission: core.commands.rekit
+  ban:
+    description: Bannir un joueur
+    aliases: [ ]
+    permission: core.commands.ban
+    usage: "/ban <player> <time> <reason>"
+  unban:
+    description: Débannir un joueur
+    aliases: [ ]
+    permission: core.commands.unban
+    usage: "/unban <player>"
+  kick:
+    description: Expulser un joueur
+    aliases: [ ]
+    permission: core.commands.kick
+    usage: "/kick <player> <reason>"
+  mute:
+    description: Mute un joueur
+    aliases: [ ]
+    permission: core.commands.mute
+    usage: "/mute <player> <time> <reason>"
+  unmute:
+    description: Démute un joueur
+    aliases: [ ]
+    permission: core.commands.unmute
+    usage: "/unmute <player>"
+  ban-ip:
+    description: Bannir une IP
+    aliases: [ ]
+    permission: core.commands.banip
+    usage: "/ban-ip <ip> <time> <reason>"
+  unban-ip:
+    description: Débannir une IP
+    aliases: [ ]
+    permission: core.commands.unbanip
+    usage: "/unban-ip <ip>"
+  freeze:
+    description: Freeze un joueur
+    aliases: [ ]
+    permission: core.commands.freeze
+    usage: "/freeze <player>"
+  unfreeze:
+    description: Défreeze un joueur
+    aliases: [ ]
+    permission: core.commands.unfreeze
+    usage: "/unfreeze <player>"
 
 book:
   author: "ViperNetwork"

@@ -21,20 +21,20 @@
 
 declare(strict_types=1);
 
-namespace Nyrok\LobbyCore\Objects;
+namespace Nyrok\LobbyCore\Items;
 
+use pocketmine\item\Hoe;
 use pocketmine\item\ItemIdentifier;
-use pocketmine\item\Sword;
 use pocketmine\item\ToolTier;
 use pocketmine\nbt\tag\CompoundTag;
 use Nyrok\LobbyCore\Traits\CustomItemTrait;
 
-class CustomSword extends Sword
+class CustomHoe extends Hoe
 {
     use CustomItemTrait;
 
     private string $textureName;
-    private float $miningSpeed = 1.5;
+    private float $miningSpeed = 1;
     private int $durability;
     private int $attackPoints;
 
@@ -63,8 +63,8 @@ class CustomSword extends Sword
                     ->setByte("hand_equipped", 1)
                     ->setInt("damage", $this->attackPoints)
                     ->setInt("creative_category", 3)
-                    ->setString("creative_group", "itemGroup.name.sword")
-                    ->setString("enchantable_slot", "sword")
+                    ->setString("creative_group", "itemGroup.name.hoe")
+                    ->setString("enchantable_slot", "hoe")
                     ->setInt("enchantable_value", 10)
                     ->setByte('can_destroy_in_creative', 1)
                     ->setTag("minecraft:icon", CompoundTag::create()

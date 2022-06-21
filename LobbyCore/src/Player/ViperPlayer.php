@@ -1,10 +1,13 @@
-<?php
+<?php /** @noinspection PhpIncompatibleReturnTypeInspection */
 
 namespace Nyrok\LobbyCore\Player;
 
+use Nyrok\LobbyCore\Managers\LanguageManager;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
+use pocketmine\lang\Language;
 use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\network\mcpe\protocol\types\GeneratorType;
 use pocketmine\player\Player;
 
 final class ViperPlayer extends Player{
@@ -39,7 +42,6 @@ final class ViperPlayer extends Player{
         $properties->normalize($properties->getProperties("parameters"));
         foreach ($properties->getProperties("parameters") as $key => $value){
             if (!(is_bool($value) && $value === false)){
-                var_dump($value);
                 $message .= $key . " : " . $value . " ┆ ";
             }
         }
@@ -88,6 +90,11 @@ final class ViperPlayer extends Player{
         return round(count(array_filter($this->clicksData, static function(float $t) use ($deltaTime, $ct) : bool{
             return ($ct - $t) <= $deltaTime;
         })) / $deltaTime, $roundPrecision);
+    }
+
+    public function getLanguage(): \Nyrok\LobbyCore\Objects\Language
+    {
+        return LanguageManager::parseLanguage(parent::getLocale());
     }
 
     public function removePlayerClickData() : void{

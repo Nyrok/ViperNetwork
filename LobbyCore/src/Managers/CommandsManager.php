@@ -2,6 +2,16 @@
 
 namespace Nyrok\LobbyCore\Managers;
 
+use Nyrok\LobbyCore\Commands\BanCommand;
+use Nyrok\LobbyCore\Commands\BanIPCommand;
+use Nyrok\LobbyCore\Commands\FreezeCommand;
+use Nyrok\LobbyCore\Commands\KickCommand;
+use Nyrok\LobbyCore\Commands\MuteCommand;
+use Nyrok\LobbyCore\Commands\RekitCommand;
+use Nyrok\LobbyCore\Commands\UnBanCommand;
+use Nyrok\LobbyCore\Commands\UnBanIPCommand;
+use Nyrok\LobbyCore\Commands\UnFreezeCommand;
+use Nyrok\LobbyCore\Commands\UnMuteCommand;
 use Nyrok\LobbyCore\Commands\ViperCommands;
 use Nyrok\LobbyCore\Core;
 
@@ -12,11 +22,28 @@ abstract class CommandsManager
      */
     public static function getCommands(): array {
         return [
-
+            new BanCommand(),
+            new BanIPCommand(),
+            new FreezeCommand(),
+            new KickCommand(),
+            new MuteCommand(),
+            new RekitCommand(),
+            new UnBanCommand(),
+            new UnBanIPCommand(),
+            new UnFreezeCommand(),
+            new UnMuteCommand(),
         ];
     }
 
     public static function initCommands(): void {
+        foreach (Core::getInstance()->getServer()->getCommandMap()->getCommands() as $command) {
+            foreach(self::getCommands() as $cmd) {
+                if($cmd->getName() === $command->getName()){
+                    Core::getInstance()->getServer()->getCommandMap()->unregister($command);
+                }
+            }
+        }
+
         foreach(self::getCommands() as $command){
             Core::getInstance()->getServer()->getCommandMap()->register($command->getName(), $command);
             Core::getInstance()->getLogger()->notice("[COMMANDS] Command: {$command->getName()} Loaded");

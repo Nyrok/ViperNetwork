@@ -22,7 +22,7 @@
 declare(strict_types=1);
 
 
-namespace Nyrok\LobbyCore\Objects;
+namespace Nyrok\LobbyCore\Items;
 
 use pocketmine\item\Item;
 use pocketmine\item\ItemIdentifier;

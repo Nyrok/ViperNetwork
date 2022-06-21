@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace Nyrok\LobbyCore\Objects;
+namespace Nyrok\LobbyCore\Items;
 
 use pocketmine\entity\Living;
 use pocketmine\item\Food;

@@ -10,10 +10,15 @@ final class PlayerProperties {
     public function __construct()
     {
         $this->setBaseProperties([
+            "status" => [
+                "muted" => false,
+                "freezed" => false,
+            ],
             "parameters" => [
                 "cps" => 0,
                 "reach" => 0,
                 "combo" => 0,
-            ]]);
+            ]
+        ]);
     }
 }

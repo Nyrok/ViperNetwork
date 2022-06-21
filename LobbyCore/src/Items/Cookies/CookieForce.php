@@ -1,7 +1,7 @@
 <?php
-namespace Nyrok\LobbyCore\Items;
+namespace Nyrok\LobbyCore\Items\Cookies;
 
-use Nyrok\LobbyCore\Objects\CustomFood;
+use Nyrok\LobbyCore\Items\CustomFood;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\entity\Living;

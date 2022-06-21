@@ -2,12 +2,12 @@
 
 namespace Nyrok\LobbyCore\Managers;
 
-use Nyrok\LobbyCore\Items\CookieForce;
-use Nyrok\LobbyCore\Items\CookieSpeed;
+use Nyrok\LobbyCore\Items\Cookies\CookieForce;
+use Nyrok\LobbyCore\Items\Cookies\CookieSpeed;
 use Exception;
 use Nyrok\LobbyCore\Core;
-use Nyrok\LobbyCore\Objects\CustomArmor;
-use Nyrok\LobbyCore\Objects\CustomSword;
+use Nyrok\LobbyCore\Items\CustomArmor;
+use Nyrok\LobbyCore\Items\CustomSword;
 use pocketmine\inventory\ArmorInventory;
 use pocketmine\inventory\CreativeInventory;
 use pocketmine\item\ArmorTypeInfo;
