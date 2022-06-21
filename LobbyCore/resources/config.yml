@@ -103,4 +103,10 @@ bump:
   x: 1.25
   y: 0.5
   z: 1.25
+
+cooldowns:
+  368:
+    name: ender-perle
+    cooldown: 15
+
 ...

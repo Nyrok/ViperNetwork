@@ -22,8 +22,7 @@ final class KickCommand extends ViperCommands
             $reason = isset($args[1]) ? implode(" ", array_slice($args, 1)) : "Aucune raison donnée.";
 $sender_language = $this->getSenderLanguage($sender);
             if($player instanceof ViperPlayer) {
-                $player->kick($reason);
-                $player->getLanguage()->getMessage("messages.kick.kicked", ["{player}" => $sender->getName(), "{reason}" => $reason])->send($player);
+                $player->kick($player->getLanguage()->getMessage("messages.kick.kicked", ["{reason}" => $reason, "{player}" => $sender->getName()])->__toString());
                 $sender_language?->getMessage("messages.kick.kicker", ["{player}" => $player->getName(), "{reason}" => $reason])->send($sender);
             } else {
                 $sender_language->getMessage("messages.player.not-found")->send($sender);

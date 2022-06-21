@@ -4,7 +4,7 @@ namespace Nyrok\LobbyCore\Objects;
 
 use pocketmine\command\CommandSender;
 
-class Message
+final class Message
 {
     public function __construct(private string $message)
     {

@@ -14,7 +14,6 @@ final class ViperPlayer extends Player{
 
     public array $cps = [], $clicksData = [];
 
-
     private PlayerProperties $properties;
 
     private CompoundTag $tag;
@@ -45,7 +44,7 @@ final class ViperPlayer extends Player{
                 $message .= $key . " : " . $value . " ┆ ";
             }
         }
-        $this->sendPopup($message);
+        $this->sendActionBarMessage($message);
     }
 
     public function disconnect(string $reason, Translatable|string|null $quitMessage = null): void

@@ -3,6 +3,7 @@ namespace Nyrok\LobbyCore;
 
 use Nyrok\LobbyCore\Databases\ConfigDatabase;
 use Nyrok\LobbyCore\Managers\CommandsManager;
+use Nyrok\LobbyCore\Managers\CooldownManager;
 use Nyrok\LobbyCore\Managers\CustomItemManager;
 use Nyrok\LobbyCore\Managers\HotbarManager;
 use Nyrok\LobbyCore\Managers\LanguageManager;
@@ -33,6 +34,7 @@ class Core extends PluginBase
         CustomItemManager::registerItems();
         CommandsManager::initCommands();
         LanguageManager::initLanguages();
+        CooldownManager::initCooldowns();
 
         $this->getLogger()->warning("[LobbyCore] has been enabled!");
     }

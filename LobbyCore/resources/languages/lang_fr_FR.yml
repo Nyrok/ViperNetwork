@@ -1,4 +1,5 @@
 messages:
+  cooldown: "Il reste un cooldown de {time} secondes !"
   player:
     not-found: "Joueur introuvable."
     not-connected: "Joueur non connecté."
@@ -9,7 +10,7 @@ messages:
     unmuter: "Vous avez unmute {player}" # {player}
     unmuted: "Vous avez été unmute par {player}" # {player}
   freeze:
-    freeze: "Vous avez été freeze par {player}" # {player}
+    freezed: "Vous avez été freeze par {player}" # {player}
     freezer: "Vous avez freeze {player}" # {player}
     unfreezed: "Vous avez été defreeze par {player}" # {player}
     unfreezer: "Vous avez defreeze {player}" # {player}

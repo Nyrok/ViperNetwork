@@ -4,6 +4,7 @@ namespace Nyrok\LobbyCore\Commands;
 
 use DateTime;
 use DateTimeZone;
+use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\command\CommandSender;
 use pocketmine\lang\Translatable;
 
@@ -26,12 +27,12 @@ final class BanCommand extends ViperCommands
             if($player){
                 $this->getOwningPlugin()->getServer()->getNameBans()->addBan($player->getName(), $reason, ($time === "forever" ? null : new DateTime())?->setTimestamp($time), $sender->getName());
                 $sender_language?->getMessage("messages.ban.banner", ["{player}" => $player->getName(), "{reason}" => $reason, "{time}" => ($time === "forever" ? "Pour toujours" : (new DateTime())->setTimestamp($time)->setTimezone(new DateTimeZone("GMT+2"))->format("d/m/Y à H:i"))])->send($sender);
-                if(($target = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($player->getName()))->isConnected()){
+                if(($target = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($player->getName()))->isConnected() and $target instanceof ViperPlayer){
                     $target->kick($target->getLanguage()->getMessage("messages.ban.banned", [
-                        "{player}" => $player->getName(),
+                        "{player}" => $sender->getName(),
                         "{reason}" => $reason,
                         "{time}" => ($time === "forever" ? "Pour toujours" : (new DateTime())->setTimestamp($time)->setTimezone(new DateTimeZone("GMT+2"))->format("d/m/Y à H:i"))]
-                    )->getMessage());
+                    )->__toString());
                 }
             } else{
                 $sender_language?->getMessage("messages.player.not-found")->send($sender);
