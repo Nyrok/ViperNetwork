@@ -5,8 +5,6 @@ use Nyrok\LobbyCore\Core;
 use Nyrok\LobbyCore\Managers\LobbyManager;
 use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\nbt\tag\ListTag;
-use pocketmine\player\Player;
 use pocketmine\world\Position;
 
 abstract class PlayerUtils
@@ -46,17 +44,18 @@ abstract class PlayerUtils
         $player->setMotion($motion);
     }
 
-    public static function valueToTag(string $property, mixed $value, CompoundTag $nbt): CompoundTag{
+    public static function valueToTag(string $property, mixed $value, ?CompoundTag $nbt = null): CompoundTag{
+        if(!$nbt) $nbt = new CompoundTag();
         return match (gettype($value)){
             "integer" => $nbt->setInt($property, $value),
             "double" => $nbt->setDouble($property, $value),
             "string" => $nbt->setString($property, $value),
             "boolean" => $nbt->setByte($property, $value),
-            "array" => $nbt->setTag($property,self::arrayToTag($value)),
+            "array" => $nbt->setTag($property, self::arraytoTag($value)),
         };
     }
 
-    public static function arraytoTag(array $array): CompoundTag {
+    public static function arraytoTag(array &$array): CompoundTag {
         $nbt = new CompoundTag();
         foreach($array as $property => $value){
             match (gettype($value)){
@@ -64,7 +63,7 @@ abstract class PlayerUtils
                 "double" => $nbt->setDouble($property, $value),
                 "string" => $nbt->setString($property, $value),
                 "boolean" => $nbt->setByte($property, $value),
-                "array" => $nbt->setTag($property ,self::arrayToTag($value)),
+                "array" => $nbt->setTag($property, self::arrayToTag($value)),
             };
         }
         return $nbt;

@@ -8,7 +8,6 @@ use Nyrok\LobbyCore\Forms\MenuForm;
 use Nyrok\LobbyCore\Forms\ModalForm;
 use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\world\Position;
-use pocketmine\player\Player;
 
 abstract class LobbyManager
 {

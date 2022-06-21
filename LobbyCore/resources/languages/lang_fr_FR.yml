@@ -1,0 +1,25 @@
+messages:
+  player:
+    not-found: "Joueur introuvable."
+    not-connected: "Joueur non connecté."
+  mute:
+    still: "Vous êtes toujours mute jusqu'au {time} pour {reason}" #  {time}, {reason}
+    muter: "Vous avez mute {player} jusqu'au {time} pour {reason}" # {player}, {time}, {reason}
+    muted: "Vous avez été mute par {player} jusqu'au {time} pour {reason}" # {player}, {time}, {reason}
+    unmuter: "Vous avez unmute {player}" # {player}
+    unmuted: "Vous avez été unmute par {player}" # {player}
+  freeze:
+    freeze: "Vous avez été freeze par {player}" # {player}
+    freezer: "Vous avez freeze {player}" # {player}
+    unfreezed: "Vous avez été defreeze par {player}" # {player}
+    unfreezer: "Vous avez defreeze {player}" # {player}
+  ban:
+    still: "Vous êtes toujours banni jusqu'au {time} pour {reason}" # {time}, {reason}
+    banned: "Vous avez été banni par {player} jusqu'au {time} pour {reason}" # {player}, {time}, {reason}
+    banner: "Vous avez banni {player} jusqu'au {time} pour {reason}" # {player}, {time}, {reason}
+    unbanner: "Vous avez unbanni {player}" # {player}
+  ban-ip:
+    still: "Vous êtes toujours banni jusqu'au {time} pour {reason}" # {time}, {reason}
+    banned: "Vous avez été banni par {player} jusqu'au {time} pour {reason}" # {player}, {time}, {reason}
+    banner: "Vous avez banni {player} jusqu'au {time} pour {reason}" # {player}, {time}, {reason}
+    unbanner: "Vous avez unbanni {player}" # {player}

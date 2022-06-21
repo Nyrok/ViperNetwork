@@ -15,10 +15,15 @@ final class PlayerProperties {
             var_dump($nbt->getTag("parameters"));
         }
         $this->setBaseProperties([
+            "status" => [
+                "muted" => false,
+                "freezed" => false,
+            ],
             "parameters" => [
                 "cps" => 0,
                 "reach" => 0,
                 "combo" => 0,
-            ]]);
+            ]
+        ]);
     }
 }
