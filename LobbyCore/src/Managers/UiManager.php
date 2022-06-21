@@ -15,12 +15,12 @@ class UiManager{
     }
 
     public function parametersUI(){
-        $form = MenuForm::withOptions("Paramètres", "", array_keys($this->player->getPlayerProperties()->getProperties("parameters")), function (ViperPlayer $player, Button $selected){
-           $form = MenuForm::withOptions($selected->text, "", ["Activer", "Désactiver"], function (ViperPlayer $player, Button $selected){
+        $form = MenuForm::withOptions("Paramètres", "", array_keys($this->player->getPlayerProperties()->getProperties("parameters")), function (ViperPlayer $player, Button $button){
+           $form = MenuForm::withOptions($button->text, "", ["Activer", "Désactiver"], function (ViperPlayer $player, Button $selected) use ($button) {
                if($selected->text === "Activer"){
-                   $player->getPlayerProperties()->setNestedProperties($selected->text, true);
+                   $player->getPlayerProperties()->setNestedProperties("parameters.".$button->text, true);
                }else{
-                   $player->getPlayerProperties()->setNestedProperties($selected->text, false);
+                   $player->getPlayerProperties()->setNestedProperties("parameters.".$button->text, false);
                }
            });
            $this->player->sendForm($form);

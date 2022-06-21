@@ -20,7 +20,7 @@ class EntityDamageByEntityEvent implements Listener{
         $damager = $event->getDamager();
         if($damager instanceof ViperPlayer){
             $properties = $damager->getPlayerProperties();
-            if(is_numeric($properties->getNestedProperties("parameters.reach"))){
+            if(is_numeric($properties->getNestedProperties("parameters.reach")) || $properties->getNestedProperties("parameters.reach") === true){
                 $distance = $entity->getPosition()->asVector3()->distance($damager->getPosition()->asVector3());
                 $properties->setNestedProperties("parameters.reach", $distance);
             }
