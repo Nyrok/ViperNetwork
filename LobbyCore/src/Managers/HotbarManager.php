@@ -9,7 +9,6 @@ use pocketmine\item\ItemIdentifier;
 use pocketmine\item\ItemIds;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\GameMode;
-use pocketmine\player\Player;
 
 abstract class HotbarManager
 {

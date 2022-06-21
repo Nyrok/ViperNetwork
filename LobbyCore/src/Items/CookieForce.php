@@ -5,7 +5,6 @@ use Nyrok\LobbyCore\Objects\CustomFood;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\entity\Living;
-use pocketmine\item\VanillaItems;
 
 final class CookieForce extends CustomFood
 {

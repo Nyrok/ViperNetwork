@@ -25,7 +25,6 @@ namespace Nyrok\LobbyCore\Objects;
 
 use pocketmine\entity\Living;
 use pocketmine\item\Food;
-use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\VanillaItems;
 use pocketmine\nbt\tag\CompoundTag;

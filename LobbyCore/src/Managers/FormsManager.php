@@ -6,7 +6,7 @@ use Nyrok\LobbyCore\Forms\menu\Button;
 use Nyrok\LobbyCore\Forms\MenuForm;
 use Nyrok\LobbyCore\Player\ViperPlayer;
 
-class UiManager{
+abstract class FormsManager{
 
     private ViperPlayer $player;
 

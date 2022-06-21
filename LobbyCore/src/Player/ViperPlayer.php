@@ -2,11 +2,10 @@
 
 namespace Nyrok\LobbyCore\Player;
 
-use Nyrok\LobbyCore\Managers\UiManager;
+use Nyrok\LobbyCore\Managers\FormsManager;
+use Nyrok\LobbyCore\Utils\PlayerUtils;
 use pocketmine\lang\Translatable;
-use pocketmine\nbt\tag\ByteArrayTag;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\nbt\tag\ListTag;
 use pocketmine\player\Player;
 
 final class ViperPlayer extends Player{
@@ -16,13 +15,13 @@ final class ViperPlayer extends Player{
 
     private PlayerProperties $properties;
 
-    public UiManager $uiManager;
+    public FormsManager $uiManager;
 
     private CompoundTag $tag;
 
     public function initEntity(CompoundTag $nbt): void
     {
-        $this->uiManager = new UiManager($this);
+        $this->uiManager = new FormsManager($this);
         $this->tag = $nbt;
         $this->initPlayerClickData();
         $this->properties = new PlayerProperties();
@@ -60,7 +59,7 @@ final class ViperPlayer extends Player{
                 "double" => $nbt->setDouble($property, $value),
                 "string" => $nbt->setString($property, $value),
                 "boolean" => $nbt->setByte($property, $value),
-                "array" => $nbt->setTag($property, ),
+                "array" => $nbt->setTag($property, PlayerUtils::arraytoTag($value)),
             };
         }
         parent::disconnect($reason, $quitMessage);

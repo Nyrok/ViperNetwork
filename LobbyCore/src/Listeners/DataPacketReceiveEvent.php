@@ -2,6 +2,7 @@
 
 namespace Nyrok\LobbyCore\Listeners;
 
+use Exception;
 use Nyrok\LobbyCore\Managers\CustomItemManager;
 use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\block\BlockFactory;
@@ -27,7 +28,6 @@ use pocketmine\network\mcpe\protocol\types\LevelEvent;
 use pocketmine\network\mcpe\protocol\types\LevelSoundEvent;
 use pocketmine\network\mcpe\protocol\types\PlayerAction;
 use pocketmine\network\mcpe\protocol\types\PlayerBlockActionWithBlockInfo;
-use pocketmine\utils\AssumptionFailedError;
 use pocketmine\world\Position;
 
 final class DataPacketReceiveEvent implements Listener
@@ -134,7 +134,8 @@ final class DataPacketReceiveEvent implements Listener
                     }
                 }
 
-            } finally {
+            } catch (Exception) {
+
             }
         }
     }

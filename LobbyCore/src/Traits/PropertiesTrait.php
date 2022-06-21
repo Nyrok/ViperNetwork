@@ -2,8 +2,6 @@
 
 namespace Nyrok\LobbyCore\Traits;
 
-use InvalidArgumentException;
-
 trait PropertiesTrait
 {
 

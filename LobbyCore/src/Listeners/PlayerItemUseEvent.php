@@ -21,7 +21,7 @@ final class PlayerItemUseEvent implements Listener
         if($player instanceof ViperPlayer){
             if(LobbyManager::onSpawn($event->getPlayer()->getPosition())){
                 match ($event->getItem()->getId()){
-                    ItemIds::FEATHER => $player->isOnGround() ? PlayerUtils::bumpPlume($event->getPlayer()) : null,
+                    ItemIds::FEATHER => $player->isOnGround() ? PlayerUtils::bumpPlume($player) : null,
                     ItemIds::MINECART_WITH_CHEST => $player->uiManager->parametersUI(),
                     default => null
                 };
