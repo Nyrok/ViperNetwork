@@ -42,7 +42,7 @@ abstract class LanguageManager
 
     public static function parseLanguage(string $language): Language|bool
     {
-        return self::$languages[$language] ?: reset(self::$languages);
+        return self::$languages[$language] ?? reset(self::$languages);
     }
 
     public static function getPrefix(): string {

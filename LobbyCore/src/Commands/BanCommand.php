@@ -19,14 +19,14 @@ final class BanCommand extends ViperCommands
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if(isset($args[0])) {
-            $player = $this->getOwningPlugin()->getServer()->getPlayer($args[0]) ?? $this->getOwningPlugin()->getServer()->getOfflinePlayer($args[0]);
+            $player = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($args[0]) ?? $this->getOwningPlugin()->getServer()->getOfflinePlayer($args[0]);
             $time = isset($args[1]) ? strtotime(str_replace(["S", "M", "H", "D", "W", "Y"], ["seconds", "minutes", "hours","days","weeks","years"], $args[1])) : "forever";
             $reason = isset($args[2]) ? implode(" ", array_slice($args, 2)) : "Aucune raison donnée.";
             $sender_language = $this->getSenderLanguage($sender);
             if($player){
                 $this->getOwningPlugin()->getServer()->getNameBans()->addBan($player->getName(), $reason, ($time === "forever" ? null : new DateTime())?->setTimestamp($time), $sender->getName());
                 $sender_language?->getMessage("messages.ban.banner", ["{player}" => $player->getName(), "{reason}" => $reason, "{time}" => ($time === "forever" ? "Pour toujours" : (new DateTime())->setTimestamp($time)->setTimezone(new DateTimeZone("GMT+2"))->format("d/m/Y à H:i"))])->send($sender);
-                if(($target = $this->getOwningPlugin()->getServer()->getPlayer($player->getName()))->isConnected()){
+                if(($target = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($player->getName()))->isConnected()){
                     $target->kick($target->getLanguage()->getMessage("messages.ban.banned", [
                         "{player}" => $player->getName(),
                         "{reason}" => $reason,

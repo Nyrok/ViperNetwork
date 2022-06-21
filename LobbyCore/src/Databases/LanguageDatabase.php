@@ -9,7 +9,7 @@ class LanguageDatabase extends Config
 {
     public function __construct(string $file, int $type = Config::YAML, array $default = [])
     {
-        parent::__construct(Core::getInstance()->getDataFolder().$file.".yml", $type, $default);
+        parent::__construct(Core::getInstance()->getDataFolder()."languages/lang_".$file.".yml", $type, $default);
     }
 
 }

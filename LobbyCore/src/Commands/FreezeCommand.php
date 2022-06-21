@@ -17,7 +17,7 @@ final class FreezeCommand extends ViperCommands
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if(isset($args[0])){
-            $player = $this->getOwningPlugin()->getServer()->getPlayer($args[0]);
+            $player = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($args[0]);
             $sender_language = $this->getSenderLanguage($sender);
             if($player){
                 $player->setImmobile(true);

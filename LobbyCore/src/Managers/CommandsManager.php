@@ -62,8 +62,8 @@ abstract class CommandsManager
      * @param string $name
      * @return string
      */
-    public static function getUsageMessage(string $name): string {
-        return Core::getInstance()->getConfig()->getNested("commands.$name", ['usageMessage' => "/$name"])['usageMessage'] ?? "";
+    public static function getUsage(string $name): string {
+        return Core::getInstance()->getConfig()->getNested("commands.$name", ['usage' => "/$name"])['usage'] ?? "";
     }
 
     /**

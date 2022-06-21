@@ -26,7 +26,7 @@ trait CommandTrait
         if(self::$command !== null){
             self::$command->setDescription(CommandsManager::getDescription(self::$command->getName()));
             self::$command->setAliases(CommandsManager::getAliases(self::$command->getName()));
-            self::$command->setUsage(CommandsManager::getUsageMessage(self::$command->getName()));;
+            self::$command->setUsage(CommandsManager::getUsage(self::$command->getName()));;
             self::$command->setPermission(
                 PermissionManager::getInstance()->addPermission(new Permission(CommandsManager::getPermission(self::$command->getName())))
                     ? CommandsManager::getPermission(self::$command->getName())
