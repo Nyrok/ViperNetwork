@@ -4,10 +4,7 @@ namespace Nyrok\LobbyCore\Player;
 
 use Nyrok\LobbyCore\Managers\LanguageManager;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
-use pocketmine\lang\Language;
-use pocketmine\lang\Translatable;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\network\mcpe\protocol\types\GeneratorType;
 use pocketmine\player\Player;
 
 final class ViperPlayer extends Player{
@@ -40,7 +37,7 @@ final class ViperPlayer extends Player{
         $properties = $this->properties;
         $properties->normalize($properties->getProperties("parameters"));
         foreach ($properties->getProperties("parameters") as $key => $value){
-            is_bool($value) && $value !== true ?: $value = 0;
+            $value !== true ?: $value = 0;
             if (is_numeric($value)){
                 $message .= $key . " : " . $value . " ┆ ";
             }
