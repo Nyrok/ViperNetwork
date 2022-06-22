@@ -2,6 +2,18 @@
 
 prefix: "§d[§5ViperNetwork§d] "
 
+grades:
+  §cAdmin:
+    chat: "{rank} §4[§cAdmin§4] {player} > {chat}"
+    nametag: "{rank}"
+    permissions:
+      - core.commands.rekit
+      - core.commands.ban
+      - core.commands.unban
+
+kits:
+  ffa: core.kits.ffa
+
 languages:
   - "fr_FR"
 
@@ -47,14 +59,19 @@ commands:
     usage: "/unban-ip <ip>"
   freeze:
     description: Freeze un joueur
-    aliases: [ ]
+    aliases: []
     permission: core.commands.freeze
     usage: "/freeze <player>"
   unfreeze:
     description: Défreeze un joueur
-    aliases: [ ]
+    aliases: []
     permission: core.commands.unfreeze
     usage: "/unfreeze <player>"
+  kit:
+    description: Modifier un kit
+    aliases: [ ]
+    permission: core.commands.kit
+    usage: "/kit <kit>"
 
 book:
   author: "ViperNetwork"
@@ -93,6 +110,7 @@ areas:
     world: world
 
 ffa:
+  kit: ffa
   position:
     x: 100
     y: 60
