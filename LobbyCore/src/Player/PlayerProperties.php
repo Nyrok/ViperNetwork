@@ -14,6 +14,7 @@ final class PlayerProperties {
         if($nbt->getTag("parameters")){
             var_dump($nbt->getTag("parameters"));
         }
+        $this->setProhibedProperties(["autosprint"]);
         $this->setBaseProperties([
             "status" => [
                 "muted" => false,
@@ -23,6 +24,9 @@ final class PlayerProperties {
                 "cps" => 0,
                 "reach" => 0,
                 "combo" => 0,
+                "ping" => 0,
+                "pots" => 0,
+                "autosprint" => true
             ]
         ]);
     }

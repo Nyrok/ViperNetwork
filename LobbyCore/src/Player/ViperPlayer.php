@@ -4,9 +4,10 @@ namespace Nyrok\LobbyCore\Player;
 
 use Nyrok\LobbyCore\Managers\LanguageManager;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
+use pocketmine\item\PotionType;
+use pocketmine\item\SplashPotion;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
-use Respect\Validation\Rules\Countable;
 
 final class ViperPlayer extends Player{
 
@@ -15,6 +16,8 @@ final class ViperPlayer extends Player{
     private PlayerProperties $properties;
 
     private CompoundTag $tag;
+
+    private int $potioncount = 0;
 
     public function initEntity(CompoundTag $nbt): void
     {
@@ -56,11 +59,24 @@ final class ViperPlayer extends Player{
 
     public function onUpdate(int $currentTick): bool
     {
+        $content = $this->getInventory()->getContents();
         $properties = $this->getPlayerProperties();
-        if (is_numeric($properties->getNestedProperties("parameters.cps")) || $properties->getNestedProperties("parameters.cps") === true){
-            $this->properties->setNestedProperties("parameters.cps", $this->getCps());
+        if ($properties->canSend("parameters.cps", true)){
+            $properties->setNestedProperties("parameters.cps", $this->getCps());
+        }
+        if($properties->canSend("parameters.ping", true)){
+            $properties->setNestedProperties("parameters.ping", $this->getNetworkSession()->getPing());
+        }
+        if($properties->canSend("parameters.pots", true)){
+            array_walk($content, function ($value,$key){
+                if($value instanceof SplashPotion && ($value->getType() === PotionType::HEALING() || $value->getType()=== PotionType::STRONG_HEALING())) {
+                    $this->potioncount++;
+                }
+            });
+            $properties->setNestedProperties("parameters.pots", $this->potioncount);
         }
         $this->sendParameters();
+        $this->potioncount = 0;
         return parent::onUpdate($currentTick);
     }
 

@@ -7,6 +7,8 @@ trait PropertiesTrait
 
     public array $properties = [];
 
+    public array $prohibedProperties = [];
+
     public function getProperties(string $name): mixed{
         return $this->properties[strtolower($name)] ?? null;
     }
@@ -14,9 +16,23 @@ trait PropertiesTrait
     public function normalize(array $properties): void{
         foreach($properties as $name => $value){
             if(!is_numeric($value) && $value === true){
-                $this->properties[$name] = 0;
+                if(!in_array($name, $this->prohibedProperties, true)){
+                    $this->properties === $properties ? $this->properties[$name] = 0 : $this->setNestedProperties("parameters.".$name, 0);
+                }
             }
         }
+    }
+
+    /**
+     * @param array $prohibedProperties
+     */
+    public function setProhibedProperties(array $prohibedProperties): void
+    {
+        $this->prohibedProperties = $prohibedProperties;
+    }
+
+    public function canSend(string $name, $nested = false): bool{
+        return $nested ? is_numeric($this->getNestedProperties($name)) || $this->getNestedProperties($name) === true : is_numeric($this->getProperties($name)) || $this->getProperties($name) === true;
     }
 
     public function setProperties(string $name, $value): self{

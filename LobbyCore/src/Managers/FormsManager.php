@@ -15,12 +15,15 @@ abstract class FormsManager{
     {
         $elements =  [];
         foreach ($player->getPlayerProperties()->getProperties("parameters") as $name => $value){
-            $elements[] = new Toggle(ucfirst($name), is_numeric($value));
+            $elements[] = new Toggle(ucfirst($name), is_numeric($value) || $value === true);
         }
         $form = new CustomForm("Paramètres",$elements, function (ViperPlayer $player, CustomFormResponse $response){
-            $toogle = $response->getToggle();
-            var_dump($toogle->text, $toogle->getValue());
-            $player->getPlayerProperties()->setNestedProperties("parameters.".strtolower($toogle->text), $toogle->getValue());
+            $newarray = [];
+            $parameters = array_keys($player->getPlayerProperties()->getProperties("parameters"));
+            for ($count  = 0, $countMax = count($response->getValues()); $count < $countMax; $count++){
+                $newarray[$parameters[$count]] = $response->getValues()[$count];
+            }
+            $player->getPlayerProperties()->setProperties("parameters", $newarray);
         });
         $player->sendForm($form);
     }
