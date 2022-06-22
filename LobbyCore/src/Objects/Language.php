@@ -2,6 +2,7 @@
 
 namespace Nyrok\LobbyCore\Objects;
 
+use JetBrains\PhpStorm\Pure;
 use Nyrok\LobbyCore\Databases\LanguageDatabase;
 use Nyrok\LobbyCore\Managers\LanguageManager;
 
@@ -15,7 +16,7 @@ final class Language extends \pocketmine\lang\Language
     /**
      * @return string
      */
-    public function getLangName(): string
+    #[Pure] public function getLangName(): string
     {
         return $this->getName();
     }
@@ -44,7 +45,6 @@ final class Language extends \pocketmine\lang\Language
 
     public function getMessage(string $key, array $params = [], bool $prefix = true): Message
     {
-        var_dump($this->getDatabase()->getAll());
         $message = ($prefix ? LanguageManager::getPrefix() : "").$this->getDatabase()->getNested($key, "");
         foreach ($params as $key => $value){
             $message = str_replace($key, $value, $message);

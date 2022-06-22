@@ -9,6 +9,7 @@ use Nyrok\LobbyCore\Listeners\DataPacketReceiveEvent;
 use Nyrok\LobbyCore\Listeners\DataPacketSendEvent;
 use Nyrok\LobbyCore\Listeners\PlayerCreationEvent;
 use Nyrok\LobbyCore\Listeners\PlayerDropItemEvent;
+use Nyrok\LobbyCore\Listeners\PlayerExhaustEvent;
 use Nyrok\LobbyCore\Listeners\PlayerInteractEvent;
 use Nyrok\LobbyCore\Listeners\PlayerItemConsumeEvent;
 use Nyrok\LobbyCore\Listeners\PlayerItemUseEvent;
@@ -34,6 +35,7 @@ abstract class ListenersManager
             new PlayerCreationEvent(),
             new BlockBreakEvent(),
             new PlayerItemConsumeEvent(),
+            new PlayerExhaustEvent()
         ];
     }
 

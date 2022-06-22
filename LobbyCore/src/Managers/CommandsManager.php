@@ -6,6 +6,7 @@ use Nyrok\LobbyCore\Commands\BanCommand;
 use Nyrok\LobbyCore\Commands\BanIPCommand;
 use Nyrok\LobbyCore\Commands\FreezeCommand;
 use Nyrok\LobbyCore\Commands\KickCommand;
+use Nyrok\LobbyCore\Commands\KitCommand;
 use Nyrok\LobbyCore\Commands\MuteCommand;
 use Nyrok\LobbyCore\Commands\RekitCommand;
 use Nyrok\LobbyCore\Commands\UnBanCommand;
@@ -32,6 +33,7 @@ abstract class CommandsManager
             new UnBanIPCommand(),
             new UnFreezeCommand(),
             new UnMuteCommand(),
+            new KitCommand()
         ];
     }
 
