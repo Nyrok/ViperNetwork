@@ -1,41 +1,51 @@
 <?php
+/**
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
 
 declare(strict_types=1);
 
+
 namespace Nyrok\LobbyCore\Forms\element;
 
-use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Immutable;
-use JetBrains\PhpStorm\Pure;
-use pocketmine\form\FormValidationException;
-use function gettype;
-use function is_bool;
 
-/** @phpstan-extends BaseElementWithValue<bool> */
-class Toggle extends BaseElementWithValue{
+class Toggle extends Element {
 
-	#[Pure] public function __construct(
-		string $text,
-		#[Immutable] public /*readonly*/ bool $default = false,
-	){
-		parent::__construct($text);
-	}
+    private bool $defaultChoice;
+    private ?bool $submittedChoice = null;
 
-	public function hasChanged() : bool{
-		return $this->default !== $this->getValue();
-	}
+    public function __construct(?string $headerText, bool $defaultChoice = false) {
+        $this->defaultChoice = $defaultChoice;
+        parent::__construct($headerText);
+    }
 
-	protected function getType() : string{ return "toggle"; }
+    public function getSubmittedChoice(): ?bool {
+        return $this->submittedChoice;
+    }
 
-	protected function validateValue(mixed $value) : void{
-		if(!is_bool($value)){
-			throw new FormValidationException("Expected bool, got " . gettype($value));
-		}
-	}
+    public function getType(): string {
+        return Element::TYPE_TOGGLE;
+    }
 
-	#[ArrayShape(["default" => "bool"])] protected function serializeElementData() : array{
-		return [
-			"default" => $this->default,
-		];
-	}
+    public function getDefaultChoice(): bool {
+        return $this->defaultChoice;
+    }
+
+    public function setDefaultChoice(bool $defaultChoice): void {
+        $this->defaultChoice = $defaultChoice;
+    }
+
+    public function assignResult($result): void {
+        $this->submittedChoice = $result;
+    }
+
+    public function serializeBody(): array {
+        return [
+            "default" => $this->defaultChoice
+        ];
+    }
+
 }

@@ -2,13 +2,15 @@
 
 namespace Nyrok\LobbyCore\Commands;
 
+use Nyrok\LobbyCore\Managers\FormsManager;
+use Nyrok\LobbyCore\Managers\LobbyManager;
 use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\command\CommandSender;
 use pocketmine\lang\Translatable;
 
-final class RekitCommand extends ViperCommands
+final class LobbyCommand extends ViperCommands
 {
-    protected const NAME = "rekit";
+    protected const NAME = "lobby";
 
     public function __construct(string $name = self::NAME, Translatable|string $description = "", Translatable|string|null $usageMessage = null, array $aliases = [])
     {
@@ -18,7 +20,8 @@ final class RekitCommand extends ViperCommands
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if($sender instanceof ViperPlayer){
-
+            LobbyManager::load($sender);
         }
     }
+
 }

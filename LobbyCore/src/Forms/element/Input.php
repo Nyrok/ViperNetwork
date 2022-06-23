@@ -1,39 +1,46 @@
 <?php
+/**
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
 
 declare(strict_types=1);
 
+
 namespace Nyrok\LobbyCore\Forms\element;
 
-use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Immutable;
-use JetBrains\PhpStorm\Pure;
-use pocketmine\form\FormValidationException;
-use function gettype;
-use function is_string;
 
-/** @phpstan-extends BaseElementWithValue<string> */
-class Input extends BaseElementWithValue{
+class Input extends Element {
 
-	#[Pure] public function __construct(
-		string $text,
-		#[Immutable] public /*readonly*/ string $placeholder,
-		#[Immutable] public /*readonly*/ string $default = "",
-	){
-		parent::__construct($text);
-	}
+    private ?string $defaultText;
+    private ?string $placeholder;
+    private ?String $submittedText = null;
 
-	protected function getType() : string{ return "input"; }
+    public function __construct(?string $headerText, ?string $defaultText = null, ?string $placeholder = null) {
+        $this->defaultText = $defaultText;
+        $this->placeholder = $placeholder;
+        parent::__construct($headerText);
+    }
 
-	protected function validateValue(mixed $value) : void{
-		if(!is_string($value)){
-			throw new FormValidationException("Expected string, got " . gettype($value));
-		}
-	}
+    public function getSubmittedText(): ?string {
+        return $this->submittedText;
+    }
 
-	#[ArrayShape(["placeholder" => "string", "default" => "string"])] protected function serializeElementData() : array{
-		return [
-			"placeholder" => $this->placeholder,
-			"default" => $this->default,
-		];
-	}
+    public function getType(): string {
+        return Element::TYPE_INPUT;
+    }
+
+    public function assignResult($result): void {
+        $this->submittedText = $result;
+    }
+
+    public function serializeBody(): array {
+        return [
+            "default" => $this->defaultText ?? "",
+            "placeholder" => $this->placeholder ?? ""
+        ];
+    }
+
 }

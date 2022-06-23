@@ -10,9 +10,7 @@ final class PlayerProperties {
     public function __construct(ViperPlayer $player)
     {
         $nbt = $player->getNBT();
-        var_dump($nbt);
         if($nbt->getTag("parameters")){
-            var_dump($nbt->getTag("parameters"));
         }
         $this->setProhibedProperties(["autosprint"]);
         $this->setBaseProperties([

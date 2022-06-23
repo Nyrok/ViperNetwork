@@ -6,8 +6,10 @@ use Nyrok\LobbyCore\Databases\KitsDatabase;
 use Nyrok\LobbyCore\Managers\CommandsManager;
 use Nyrok\LobbyCore\Managers\CooldownManager;
 use Nyrok\LobbyCore\Managers\CustomItemManager;
+use Nyrok\LobbyCore\Managers\FFAManager;
 use Nyrok\LobbyCore\Managers\HotbarManager;
 use Nyrok\LobbyCore\Managers\KitsManager;
+use Nyrok\LobbyCore\Managers\KnockBackManager;
 use Nyrok\LobbyCore\Managers\LanguageManager;
 use Nyrok\LobbyCore\Managers\ListenersManager;
 use Nyrok\LobbyCore\Managers\MenuManager;
@@ -42,6 +44,8 @@ class Core extends PluginBase
         CooldownManager::initCooldowns();
         KitsManager::initKits();
         MenuManager::initMenu();
+        KnockBackManager::initKnockBack();
+        FFAManager::initFFA();
 
         $this->getLogger()->warning("[LobbyCore] has been enabled!");
     }

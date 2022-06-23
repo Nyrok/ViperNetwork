@@ -13,6 +13,7 @@ use Nyrok\LobbyCore\Menu\type\InvMenuTypeIds;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
+use pocketmine\item\VanillaItems;
 use pocketmine\nbt\tag\ByteTag;
 use pocketmine\player\Player;
 
@@ -58,7 +59,7 @@ final class Kit
      */
     public function getItems(): array {
         return array_filter($this->getContents(), function ($value){
-            if($value instanceof Item and !in_array($value->getId(), [47, 48, 50, 51]) and $value->getNamedTag()->getTag('imbougeable')) return true;
+            if($value instanceof Item and !in_array($value->getId(), [47, 48, 50, 51]) and !$value->getNamedTag()->getTag('imbougeable')) return true;
             return false;
         });
     }
@@ -68,7 +69,7 @@ final class Kit
      */
     public function getArmor(): ?array {
         return array_values(array_filter($this->getContents(), function ($value){
-            if($value instanceof Item and in_array($value->getId(), [47, 48, 50, 51]) and $value->getNamedTag()->getTag('imbougeable')) return true;
+            if($value instanceof Item and in_array($value->getId(), [47, 48, 50, 51]) and !$value->getNamedTag()->getTag('imbougeable')) return true;
             return false;
         }, ARRAY_FILTER_USE_BOTH));
     }
@@ -86,10 +87,10 @@ final class Kit
         $player->getArmorInventory()->clearAll();
         $player->getInventory()->clearAll();
         $player->getInventory()->setContents(self::getItems());
-        $player->getArmorInventory()->setHelmet(self::getArmor()[0]);
-        $player->getArmorInventory()->setChestplate(self::getArmor()[1]);
-        $player->getArmorInventory()->setLeggings(self::getArmor()[2]);
-        $player->getArmorInventory()->setBoots(self::getArmor()[3]);
+        $player->getArmorInventory()->setHelmet(self::getArmor()[0] ?? VanillaItems::AIR());
+        $player->getArmorInventory()->setChestplate(self::getArmor()[1] ?? VanillaItems::AIR());
+        $player->getArmorInventory()->setLeggings(self::getArmor()[2] ?? VanillaItems::AIR());
+        $player->getArmorInventory()->setBoots(self::getArmor()[3] ?? VanillaItems::AIR());
     }
 
     /**
@@ -100,6 +101,8 @@ final class Kit
         $this->setContents(KitsManager::getKitContent($this));
     }
 
+    /**
+     */
     public function edit(Player $player): void {
         $menu = InvMenu::create(InvMenuTypeIds::TYPE_DOUBLE_CHEST);
         $menu->setName($this->getName());
@@ -115,7 +118,7 @@ final class Kit
             }
             return new InvMenuTransactionResult(false);
         });
-        $menu->getInventory()->setContents($this->getContents());
+        $menu->getInventory()->setContents($this->getContents() ?? []);
         for($i = 36; $i < 54; $i++) {
             $item = ItemFactory::getInstance()->get(ItemIds::STAINED_GLASS_PANE, 10, 1);
             $item->setCustomName("§dBloqué");

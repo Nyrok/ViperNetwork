@@ -17,6 +17,11 @@ kits:
 languages:
   - "fr_FR"
 
+knockback:
+  x: 0.40
+  y: 0.40
+  z: 0.40
+
 commands:
   rekit:
     description: Se rekit
@@ -72,6 +77,16 @@ commands:
     aliases: [ ]
     permission: core.commands.kit
     usage: "/kit <kit>"
+  kb:
+    description: Modifier les Kbs
+    aliases: [ ]
+    permission: core.commands.kb
+    usage: "/kb"
+  lobby:
+    description: Retourner au Lobby
+    aliases: [hub, spawn]
+    permission: core.commands.lobby
+    usage: "/lobby"
 
 book:
   author: "ViperNetwork"
@@ -111,10 +126,10 @@ areas:
 
 ffa:
   kit: ffa
-  position:
-    x: 100
-    y: 60
-    z: 100
+  area:
+    x: [402, 415]
+    y: [67, 75]
+    z: [411, 409]
     world: world
 
 bump:

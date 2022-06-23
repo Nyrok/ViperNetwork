@@ -12,17 +12,23 @@ declare(strict_types=1);
 namespace Nyrok\LobbyCore\Forms\element;
 
 
-class Dropdown extends Selector {
+use Nyrok\LobbyCore\Forms\utils\Submittable;
 
-    public function getType(): string {
-        return Element::TYPE_DROPDOWN;
+class ModalOption {
+    use Submittable;
+
+    private string $text;
+
+    public function __construct(string $text) {
+        $this->text = $text;
     }
 
-    public function serializeBody(): array {
-        return [
-            "options" => $this->getOptionsTexts(),
-            "default" => $this->getDefaultIndex()
-        ];
+    public function getText(): string {
+        return $this->text;
+    }
+
+    public function setText(string $text): void {
+        $this->text = $text;
     }
 
 }

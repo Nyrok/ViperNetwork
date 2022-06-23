@@ -3,9 +3,12 @@
 namespace Nyrok\LobbyCore\Player;
 
 use Nyrok\LobbyCore\Managers\LanguageManager;
+use Nyrok\LobbyCore\Objects\Language;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
+use pocketmine\entity\Attribute;
 use pocketmine\item\PotionType;
 use pocketmine\item\SplashPotion;
+use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
 
@@ -68,7 +71,7 @@ final class ViperPlayer extends Player{
             $properties->setNestedProperties("parameters.ping", $this->getNetworkSession()->getPing());
         }
         if($properties->canSend("parameters.pots", true)){
-            array_walk($content, function ($value,$key){
+            array_walk($content, function ($value){
                 if($value instanceof SplashPotion && ($value->getType() === PotionType::HEALING() || $value->getType()=== PotionType::STRONG_HEALING())) {
                     $this->potioncount++;
                 }
@@ -102,12 +105,36 @@ final class ViperPlayer extends Player{
         })) / $deltaTime, $roundPrecision);
     }
 
-    public function getLanguage(): \Nyrok\LobbyCore\Objects\Language
+    public function getLanguage(): Language
     {
         return LanguageManager::parseLanguage(parent::getLocale());
     }
 
     public function removePlayerClickData() : void{
         unset($this->clicksData, $this->cps);
+    }
+
+    public function knockBack(float $x, float $z, float $force = 0.4, ?float $verticalLimit = 0.4): void{
+        $f = sqrt($x * $x + $z * $z);
+        if($f <= 0){
+            return;
+        }
+        if(mt_rand() / mt_getrandmax() > $this->knockbackResistanceAttr->getValue()){
+            $f = 1 / $f;
+
+            $motionX = $this->motion->x / 2;
+            $motionY = $this->motion->y / 2;
+            $motionZ = $this->motion->z / 2;
+            $motionX += $x * $f * $force;
+            $motionY += $force;
+            $motionZ += $z * $f * $force;
+
+            $verticalLimit ??= $force;
+            if($motionY > $verticalLimit){
+                $motionY = $verticalLimit;
+            }
+
+            $this->setMotion(new Vector3($motionX, $motionY, $motionZ));
+        }
     }
 }

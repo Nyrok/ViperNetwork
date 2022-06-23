@@ -2,9 +2,10 @@
 
 namespace Nyrok\LobbyCore\Managers;
 
-use JetBrains\PhpStorm\Pure;
+use JsonException;
 use Nyrok\LobbyCore\Core;
 use Nyrok\LobbyCore\Objects\Kit;
+use pocketmine\item\Item;
 
 abstract class KitsManager
 {
@@ -13,6 +14,9 @@ abstract class KitsManager
      */
     public static array $kits = [];
 
+    /**
+     * @throws JsonException
+     */
     public static function initKits(): void {
         foreach (self::getConfigKits() as $kit => $permission){
             self::$kits[$kit] = new Kit($kit, $permission);
@@ -41,10 +45,14 @@ abstract class KitsManager
      */
     public static function getKitContent(Kit $kit): array
     {
-        return Core::getInstance()->getKits()->get($kit->getName(), []);
+        $content = [];
+        foreach(Core::getInstance()->getKits()->get($kit->getName(), []) as $slot => $item){
+            $content[$slot] = Item::jsonDeserialize($item);
+        }
+        return $content;
     }
 
-    #[Pure] public static function getKit(string $kit): ?Kit
+    public static function getKit(string $kit): ?Kit
     {
         return self::getKits()[$kit] ?? reset(self::$kits);
     }

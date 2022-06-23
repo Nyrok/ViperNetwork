@@ -1,63 +1,86 @@
 <?php
+/**
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
 
 declare(strict_types=1);
 
+
 namespace Nyrok\LobbyCore\Forms\element;
 
-use InvalidArgumentException;
-use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Immutable;
-use pocketmine\form\FormValidationException;
-use function gettype;
-use function is_float;
-use function is_int;
 
-/** @phpstan-extends BaseElementWithValue<int|float> */
-class Slider extends BaseElementWithValue{
+class Slider extends Element {
 
-	public function __construct(
-		string $text,
-		#[Immutable] public /*readonly*/ float $min,
-		#[Immutable] public /*readonly*/ float $max,
-		#[Immutable] public /*readonly*/ float $step = 1.0,
-		#[Immutable] public /*readonly*/ ?float $default = null,
-	){
-		parent::__construct($text);
+    private float $minStep;
+    private float $maxStep;
 
-		if($this->min > $this->max){
-			throw new InvalidArgumentException("Slider min value should be less than max value");
-		}
+    private float $defaultStep;
+    private float $stepLength;
 
-		if($default !== null){
-			if($default > $this->max or $default < $this->min){
-				throw new InvalidArgumentException("Default must be in range $this->min ... $this->max");
-			}
-		}else{
-			$this->default = $this->min;
-		}
+    private ?float $submittedStep = null;
 
-		if($step <= 0){
-			throw new InvalidArgumentException("Step must be greater than zero");
-		}
-	}
+    public function __construct(?string $headerText, float $minStep, float $maxStep, float $defaultStep = 0, float $stepLength = 0) {
+        $this->minStep = $minStep;
+        $this->maxStep = $maxStep;
+        $this->defaultStep = $defaultStep;
+        $this->stepLength = $stepLength;
+        parent::__construct($headerText);
+    }
 
-	protected function getType() : string{ return "slider"; }
+    public function getSubmittedStep(): ?float {
+        return $this->submittedStep;
+    }
 
-	protected function validateValue(mixed $value) : void{
-		if(!is_float($value) and !is_int($value)){
-			throw new FormValidationException("Expected float, got " . gettype($value));
-		}
-		if($value < $this->min or $value > $this->max){
-			throw new FormValidationException("Value $value is out of bounds (min $this->min, max $this->max)");
-		}
-	}
+    public function getType(): string {
+        return Element::TYPE_SLIDER;
+    }
 
-	#[ArrayShape(["min" => "float", "max" => "float", "step" => "float", "default" => "float|null"])] protected function serializeElementData() : array{
-		return [
-			"min" => $this->min,
-			"max" => $this->max,
-			"step" => $this->step,
-			"default" => $this->default,
-		];
-	}
+    public function getMinStep(): float {
+        return $this->minStep;
+    }
+
+    public function setMinStep(float $minStep): void {
+        $this->minStep = $minStep;
+    }
+
+    public function getMaxStep(): float {
+        return $this->maxStep;
+    }
+
+    public function setMaxStep(float $maxStep): void {
+        $this->maxStep = $maxStep;
+    }
+
+    public function getDefaultStep(): float {
+        return $this->defaultStep;
+    }
+
+    public function setDefaultStep(float $defaultStep): void {
+        $this->defaultStep = $defaultStep;
+    }
+
+    public function getStepLength(): float {
+        return $this->stepLength;
+    }
+
+    public function setStepLength(float $stepLength): void {
+        $this->stepLength = $stepLength;
+    }
+
+    public function assignResult($result): void {
+        $this->submittedStep = $result;
+    }
+
+    public function serializeBody(): array {
+        return [
+            "min" => $this->minStep,
+            "max" => $this->maxStep,
+            "default" => $this->defaultStep,
+            "step" => $this->stepLength
+        ];
+    }
+
 }

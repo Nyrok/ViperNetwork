@@ -26,15 +26,13 @@ abstract class HotbarManager
         }
         $item->setCustomName("Présentation de ViperNetwork");
         self::$items[0] = $item;
-        Core::getInstance()->getLogger()->notice("[HOTBAR] Item: ".$item->getName()." Loaded");
-
         self::$items[2] = VanillaItems::DIAMOND_SWORD()->setCustomName("FFA");
-
         self::$items[4] = VanillaItems::COMPASS()->setCustomName("Modes de Jeux");
-
         self::$items[6] = VanillaItems::FEATHER()->setCustomName("Bump");
-
         self::$items[8] = (new Item(new ItemIdentifier(ItemIds::MINECART_WITH_CHEST, 0), "Paramètres"))->setCustomName("Paramètres");
+        foreach (self::getItems() as $item){
+            Core::getInstance()->getLogger()->notice("[HOTBAR] Item: ".$item->getName()." Loaded");
+        }
     }
 
     /**

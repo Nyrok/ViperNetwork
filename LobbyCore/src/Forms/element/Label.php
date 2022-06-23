@@ -1,30 +1,33 @@
 <?php
+/**
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
 
 declare(strict_types=1);
 
+
 namespace Nyrok\LobbyCore\Forms\element;
 
-use JetBrains\PhpStorm\Pure;
-use pocketmine\form\FormValidationException;
-use function gettype;
-use function is_null;
 
-/** @phpstan-extends BaseElementWithValue<null> */
-class Label extends BaseElementWithValue{
+class Label extends Element {
 
-	#[Pure] public function __construct(string $text){
-		parent::__construct($text);
-	}
+    public function __construct(string $headerText) {
+        parent::__construct($headerText);
+    }
 
-	protected function getType() : string{ return "label"; }
+    public function getType(): string {
+        return Element::TYPE_LABEL;
+    }
 
-	protected function validateValue(mixed $value) : void{
-		if(!is_null($value)){
-			throw new FormValidationException("Expected null, got " . gettype($value));
-		}
-	}
+    public function assignResult($result): void {
+        return;
+    }
 
-	protected function serializeElementData() : array{
-		return [];
-	}
+    public function serializeBody(): array {
+        return [];
+    }
+
 }

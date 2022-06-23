@@ -5,8 +5,10 @@ namespace Nyrok\LobbyCore\Managers;
 use Nyrok\LobbyCore\Commands\BanCommand;
 use Nyrok\LobbyCore\Commands\BanIPCommand;
 use Nyrok\LobbyCore\Commands\FreezeCommand;
+use Nyrok\LobbyCore\Commands\KbCommand;
 use Nyrok\LobbyCore\Commands\KickCommand;
 use Nyrok\LobbyCore\Commands\KitCommand;
+use Nyrok\LobbyCore\Commands\LobbyCommand;
 use Nyrok\LobbyCore\Commands\MuteCommand;
 use Nyrok\LobbyCore\Commands\RekitCommand;
 use Nyrok\LobbyCore\Commands\UnBanCommand;
@@ -33,7 +35,9 @@ abstract class CommandsManager
             new UnBanIPCommand(),
             new UnFreezeCommand(),
             new UnMuteCommand(),
-            new KitCommand()
+            new KitCommand(),
+            new KbCommand(),
+            new LobbyCommand()
         ];
     }
 
@@ -48,7 +52,7 @@ abstract class CommandsManager
 
         foreach(self::getCommands() as $command){
             Core::getInstance()->getServer()->getCommandMap()->register($command->getName(), $command);
-            Core::getInstance()->getLogger()->notice("[COMMANDS] Command: {$command->getName()} Loaded");
+            Core::getInstance()->getLogger()->notice("[COMMANDS] Command: /{$command->getName()} Loaded");
         }
     }
 

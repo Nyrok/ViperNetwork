@@ -2,6 +2,8 @@
 
 namespace Nyrok\LobbyCore\Listeners;
 
+use Nyrok\LobbyCore\Managers\FFAManager;
+use Nyrok\LobbyCore\Managers\FormsManager;
 use Nyrok\LobbyCore\Managers\LobbyManager;
 use Nyrok\LobbyCore\Player\ViperPlayer;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
@@ -22,10 +24,10 @@ final class PlayerInteractEvent implements Listener
             if(LobbyManager::onSpawn($event->getPlayer()->getPosition())){
                 switch ($event->getItem()->getId()){
                     case ItemIds::DIAMOND_SWORD:
-                        PlayerUtils::teleportToFFA($player);
+                        FFAManager::getFFA()->load($player);
                         break;
                     case ItemIds::COMPASS:
-                        LobbyManager::modesForm($player);
+                        FormsManager::modesForm($player);
                         break;
                 }
             }
