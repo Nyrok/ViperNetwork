@@ -2,6 +2,7 @@
 
 namespace Nyrok\LobbyCore\Commands;
 
+use Nyrok\LobbyCore\Managers\FFAManager;
 use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\command\CommandSender;
 use pocketmine\lang\Translatable;
@@ -18,7 +19,9 @@ final class RekitCommand extends ViperCommands
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if($sender instanceof ViperPlayer){
-
+            if(FFAManager::getFFA()->onArea($sender->getPosition())){
+                FFAManager::getFFA()->getKit()->send($sender);
+            }
         }
     }
 }
