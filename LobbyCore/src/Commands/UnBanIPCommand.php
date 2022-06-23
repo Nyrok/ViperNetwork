@@ -15,6 +15,7 @@ final class UnBanIPCommand extends ViperCommands
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
+        if(parent::execute($sender,$commandLabel, $args))
         if(isset($args[0])) {
             $player = $this->getOwningPlugin()->getServer()->getOfflinePlayer($args[0])?->getAddress() ?? substr_count($args[0], ".") === 4 ? $args[0] : null;
             $sender_language = $this->getSenderLanguage($sender);

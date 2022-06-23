@@ -17,6 +17,7 @@ final class KickCommand extends ViperCommands
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
+        if(parent::execute($sender,$commandLabel, $args))
         if(isset($args[0])) {
             $player = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($args[0]);
             $reason = isset($args[1]) ? implode(" ", array_slice($args, 1)) : "Aucune raison donnée.";

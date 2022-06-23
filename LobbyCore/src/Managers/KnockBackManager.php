@@ -16,7 +16,7 @@ abstract class KnockBackManager
         }
     }
 
-    private static function getKnockBackX(): float {
+    public static function getKnockBackX(): float {
         return Core::getInstance()->getConfig()->getNested("knockback.x", 0.40);
     }
 
@@ -24,7 +24,7 @@ abstract class KnockBackManager
         return Core::getInstance()->getConfig()->getNested("knockback.y", 0.40);
     }
 
-    private static function getKnockBackZ(): float {
+    public static function getKnockBackZ(): float {
         return Core::getInstance()->getConfig()->getNested("knockback.z", 0.40);
     }
 

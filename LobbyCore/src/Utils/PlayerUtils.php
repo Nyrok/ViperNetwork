@@ -55,7 +55,7 @@ abstract class PlayerUtils
         };
     }
 
-    public static function arraytoTag(array &$array): CompoundTag {
+    public static function arraytoTag(array $array): CompoundTag {
         $nbt = new CompoundTag();
         foreach($array as $property => $value){
             match (gettype($value)){
@@ -64,6 +64,7 @@ abstract class PlayerUtils
                 "string" => $nbt->setString($property, $value),
                 "boolean" => $nbt->setByte($property, $value),
                 "array" => $nbt->setTag($property, self::arrayToTag($value)),
+                default => null
             };
         }
         return $nbt;

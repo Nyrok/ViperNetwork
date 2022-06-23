@@ -42,4 +42,13 @@ abstract class ViperCommands extends Command implements PluginOwned
     {
         return Core::getInstance();
     }
+
+    public function execute(CommandSender $sender, string $commandLabel, array $args)
+    {
+        if(!$this->testPermission($sender)){
+            self::getSenderLanguage($sender)->getMessage("messages.commands.not-permission")->send($sender);
+            return false;
+        }
+        return true;
+    }
 }

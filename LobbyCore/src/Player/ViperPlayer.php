@@ -2,15 +2,17 @@
 
 namespace Nyrok\LobbyCore\Player;
 
+use Nyrok\LobbyCore\Managers\GradesManager;
 use Nyrok\LobbyCore\Managers\LanguageManager;
+use Nyrok\LobbyCore\Objects\Grade;
 use Nyrok\LobbyCore\Objects\Language;
 use Nyrok\LobbyCore\Utils\PlayerUtils;
-use pocketmine\entity\Attribute;
 use pocketmine\item\PotionType;
 use pocketmine\item\SplashPotion;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\player\Player;
+use pocketmine\world\Position;
 
 final class ViperPlayer extends Player{
 
@@ -62,6 +64,8 @@ final class ViperPlayer extends Player{
 
     public function onUpdate(int $currentTick): bool
     {
+        $this->setScoreTag(str_replace(["{player}"], [$this->getName()], $this->getGrade()->getScoretag()));
+        $this->setNameTag(str_replace(["{player}"], [$this->getName()], $this->getGrade()->getNametag()));
         $content = $this->getInventory()->getContents();
         $properties = $this->getPlayerProperties();
         if ($properties->canSend("parameters.cps", true)){
@@ -110,6 +114,11 @@ final class ViperPlayer extends Player{
         return LanguageManager::parseLanguage(parent::getLocale());
     }
 
+    public function getGrade(): Grade
+    {
+        return GradesManager::parseGrade($this->getPlayerProperties()->getNestedProperties("infos.grade")) ?? GradesManager::getDefaultGrade();
+    }
+
     public function removePlayerClickData() : void{
         unset($this->clicksData, $this->cps);
     }
@@ -136,5 +145,13 @@ final class ViperPlayer extends Player{
 
             $this->setMotion(new Vector3($motionX, $motionY, $motionZ));
         }
+    }
+
+    public function updatePermissions(){
+        $this->setBasePermission("", "");
+    }
+
+    public function smoothPerle(Position $position): void {
+        $this->move($position->getX() - $this->getPosition()->getX(), $position->getY(), $position->getZ() - $this->getPosition()->getZ());
     }
 }

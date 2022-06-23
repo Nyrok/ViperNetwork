@@ -7,6 +7,7 @@ use Nyrok\LobbyCore\Managers\CommandsManager;
 use Nyrok\LobbyCore\Managers\CooldownManager;
 use Nyrok\LobbyCore\Managers\CustomItemManager;
 use Nyrok\LobbyCore\Managers\FFAManager;
+use Nyrok\LobbyCore\Managers\GradesManager;
 use Nyrok\LobbyCore\Managers\HotbarManager;
 use Nyrok\LobbyCore\Managers\KitsManager;
 use Nyrok\LobbyCore\Managers\KnockBackManager;
@@ -52,6 +53,7 @@ class Core extends PluginBase
         MenuManager::initMenu();
         KnockBackManager::initKnockBack();
         FFAManager::initFFA();
+        GradesManager::initGrades();
 
         $this->getLogger()->warning("[LobbyCore] has been enabled!");
     }

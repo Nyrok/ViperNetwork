@@ -1,11 +1,23 @@
 ---
-
 prefix: "§d[§5ViperNetwork§d] "
 
 grades:
-  §cAdmin:
-    chat: "{rank} §4[§cAdmin§4] {player} > {chat}"
-    nametag: "{rank}"
+  # TODO: LE PREMIER GRADE EST LE GRADE PAR DEFAUT!
+
+  Joueur:
+    # {player}, {chat}, {rank}
+    chat: "§4[§6Joueur§4] §c{player} §4> {chat}"
+    nametag: "§4[§6Joueur§4] §c{player}"
+    scoretag: "{rank}"
+    permissions:
+      - core.commands.rekit
+      - core.commands.ban
+      - core.commands.unban
+  Admin:
+    # {player}, {chat}, {rank}
+    chat: "§4[§cAdmin§4] §c{player} §4> {chat}"
+    nametag: "§4[§cAdmin§4] §c{player}"
+    scoretag: "{rank}"
     permissions:
       - core.commands.rekit
       - core.commands.ban
@@ -19,7 +31,7 @@ languages:
 
 knockback:
   x: 0.40
-  y: 0.40
+  y: 1.0
   z: 0.40
 
 commands:
@@ -82,11 +94,11 @@ commands:
     aliases: [ ]
     permission: core.commands.kb
     usage: "/kb"
-  lobby:
+  spawn:
     description: Retourner au Lobby
-    aliases: [hub, spawn]
+    aliases: []
     permission: core.commands.lobby
-    usage: "/lobby"
+    usage: "/spawn"
 
 book:
   author: "ViperNetwork"
@@ -95,6 +107,7 @@ book:
     1: "Salut je suis un test"
     2: "Salut je suis un deuxième test"
     3: "Salut je suis un troisième test"
+    4: ""
 
 modes:
   §d- Faction -:
@@ -141,5 +154,4 @@ cooldowns:
   368:
     name: ender-perle
     cooldown: 15
-
 ...

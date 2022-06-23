@@ -19,6 +19,7 @@ final class MuteCommand extends ViperCommands
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
+        if(parent::execute($sender,$commandLabel, $args))
         if(isset($args[0], $args[1])) {
             $player = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($args[0]);
             $sender_language = $this->getSenderLanguage($sender);

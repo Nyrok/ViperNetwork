@@ -13,6 +13,7 @@ use Nyrok\LobbyCore\Forms\variant\ModalForm;
 use Nyrok\LobbyCore\Forms\variant\SimpleForm;
 use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\player\Player;
+use pocketmine\Server;
 
 abstract class FormsManager{
 
@@ -23,14 +24,14 @@ abstract class FormsManager{
         $params = $player->getPlayerProperties()->getProperties("parameters");
         $form = new CustomForm("Paramètres", function (Player $player, FormResponse $response) use ($params){
             $newarray = [];
-            array_walk($params, function ($value, $name) use ($response, $newarray){
+            foreach ($player->getPlayerProperties()->getProperties("parameters") as $name => $value){
                 $newarray[$name] = $response->getToggleSubmittedChoice($name);
-            });
+            }
             $player->getPlayerProperties()->setProperties("parameters", $newarray);
         });
-        array_walk($params, function ($value, $name) use ($form){
+        foreach ($player->getPlayerProperties()->getProperties("parameters") as $name => $value){
             $form->addElement($name, new Toggle(ucfirst($name), is_numeric($value) || $value === true));
-        });
+        }
         $player->sendForm($form);
     }
 
@@ -41,10 +42,12 @@ abstract class FormsManager{
                 "y" => $response->getInputSubmittedText("y"),
                 "z" => $response->getInputSubmittedText("z"),
             ]);
+            Core::getInstance()->reloadConfig();
+            KnockBackManager::initKnockBack();
         });
-        $form->addElement("x", new Input('Valeur X', "0.40", ""));
-        $form->addElement("y", new Input('Valeur Y', "0.40", ""));
-        $form->addElement("z", new Input('Valeur Z', "0.40", ""));
+        $form->addElement("x", new Input('Valeur X', KnockBackManager::getKnockBackX(), "1"));
+        $form->addElement("y", new Input('Valeur Y', KnockBackManager::getKnockBackY(), "3"));
+        $form->addElement("z", new Input('Valeur Z', KnockBackManager::getKnockBackZ(), "1"));
         $player->sendForm($form);
     }
 
@@ -68,6 +71,29 @@ abstract class FormsManager{
         $form->setDenyListener(function (Player $player) use ($mode): void {
             self::modesForm($player);
         });
+        $player->sendForm($form);
+    }
+
+    public static function gradesForm(ViperPlayer $player): void
+    {
+        $form = new SimpleForm("Grades", "");
+        foreach (Server::getInstance()->getOnlinePlayers() as $target){
+            $form->addButton(new Button($target->getName().", Grade: ".$target->getGrade()->getName(), null, function (Player $player) use ($target){
+                self::setGradeForm($player, $target);
+            }));
+        }
+        $player->sendForm($form);
+    }
+
+    public static function setGradeForm(Player $player, Player $target): void
+    {
+        $form = new SimpleForm("Grades", "");
+        foreach (GradesManager::getGrades() as $name => $grade){
+            $form->addButton(new Button($grade->getName(), null, function (Player $player) use ($name, $target){
+                $target->getPlayerProperties()->setNestedProperties("infos.grade", $name);
+                $player->getLanguage()->getMessage("messages.grades.set", ["{player}" => $target->getName(), "{grade}" => $name], true)->send($player);
+            }));
+        }
         $player->sendForm($form);
     }
 }

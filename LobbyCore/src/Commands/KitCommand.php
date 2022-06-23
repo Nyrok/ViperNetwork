@@ -18,6 +18,7 @@ class KitCommand extends ViperCommands
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
+        if(parent::execute($sender,$commandLabel, $args))
         if($sender instanceof ViperPlayer){
             KitsManager::getKit($args[0])->edit($sender);
         }

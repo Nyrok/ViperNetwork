@@ -19,6 +19,7 @@ final class BanCommand extends ViperCommands
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
+        if(parent::execute($sender,$commandLabel, $args))
         if(isset($args[0])) {
             $player = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($args[0]) ?? $this->getOwningPlugin()->getServer()->getOfflinePlayer($args[0]);
             $time = isset($args[1]) ? strtotime(str_replace(["S", "M", "H", "D", "W", "Y"], ["seconds", "minutes", "hours","days","weeks","years"], $args[1])) : "forever";

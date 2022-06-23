@@ -22,6 +22,7 @@ final class BanIPCommand extends ViperCommands
      */
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
+        if(parent::execute($sender,$commandLabel, $args))
         if(isset($args[0])) {
             $ip = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($args[0])?->getAddress() ?? $this->getOwningPlugin()->getServer()->getOfflinePlayer($args[0])?->getAddress() ?? (substr_count($args[0], ".") === 4 ? $args[0] : null);
             $time = isset($args[1]) ? strtotime(str_replace(["S", "M", "H", "D", "W", "Y"], ["seconds", "minutes", "hours","days","weeks","years"], $args[1])) : "forever";

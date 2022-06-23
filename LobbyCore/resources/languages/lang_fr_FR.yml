@@ -1,4 +1,6 @@
 messages:
+  commands:
+    not-permission: "Vous n'avez pas la permission d'utiliser cette commande"
   cooldown: "Il reste un cooldown de {time} secondes !"
   player:
     not-found: "Joueur introuvable."
@@ -24,3 +26,5 @@ messages:
     banned: "Vous avez été banni par {player} jusqu'au {time} pour {reason}" # {player}, {time}, {reason}
     banner: "Vous avez banni {player} jusqu'au {time} pour {reason}" # {player}, {time}, {reason}
     unbanner: "Vous avez unbanni {player}" # {player}
+  grades:
+    set: "J'ai bien définis le grade de {player} à {grade}" # {player}, {grade}
