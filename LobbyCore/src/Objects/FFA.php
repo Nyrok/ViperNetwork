@@ -6,7 +6,7 @@ use JetBrains\PhpStorm\Pure;
 use Nyrok\LobbyCore\Player\ViperPlayer;
 use pocketmine\math\Vector3;
 
-class FFA
+final class FFA
 {
     public function __construct(public Kit $kit, public array $area)
     {

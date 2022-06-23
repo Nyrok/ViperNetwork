@@ -12,7 +12,10 @@ use Nyrok\LobbyCore\Managers\KitsManager;
 use Nyrok\LobbyCore\Managers\KnockBackManager;
 use Nyrok\LobbyCore\Managers\LanguageManager;
 use Nyrok\LobbyCore\Managers\ListenersManager;
+use Nyrok\LobbyCore\Managers\LobbyManager;
 use Nyrok\LobbyCore\Managers\MenuManager;
+use pocketmine\entity\Location;
+use pocketmine\entity\Zombie;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 
@@ -28,6 +31,9 @@ class Core extends PluginBase
         CustomItemManager::initCustomItems();
     }
 
+    /**
+     * @throws \JsonException
+     */
     protected function onEnable(): void
     {
         $this::setInstance($this);

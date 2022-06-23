@@ -7,6 +7,8 @@ use Nyrok\LobbyCore\Core;
 use Nyrok\LobbyCore\Listeners\BlockBreakEvent;
 use Nyrok\LobbyCore\Listeners\DataPacketReceiveEvent;
 use Nyrok\LobbyCore\Listeners\DataPacketSendEvent;
+use Nyrok\LobbyCore\Listeners\EntityDamageByEntityEvent;
+use Nyrok\LobbyCore\Listeners\PlayerChatEvent;
 use Nyrok\LobbyCore\Listeners\PlayerCreationEvent;
 use Nyrok\LobbyCore\Listeners\PlayerDropItemEvent;
 use Nyrok\LobbyCore\Listeners\PlayerExhaustEvent;
@@ -35,7 +37,9 @@ abstract class ListenersManager
             new PlayerCreationEvent(),
             new BlockBreakEvent(),
             new PlayerItemConsumeEvent(),
-            new PlayerExhaustEvent()
+            new PlayerExhaustEvent(),
+            new EntityDamageByEntityEvent(),
+            new PlayerChatEvent(),
         ];
     }
 

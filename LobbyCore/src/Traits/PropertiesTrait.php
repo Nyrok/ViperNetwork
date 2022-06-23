@@ -32,7 +32,9 @@ trait PropertiesTrait
     }
 
     public function canSend(string $name, $nested = false): bool{
-        return $nested ? is_numeric($this->getNestedProperties($name)) || $this->getNestedProperties($name) === true : is_numeric($this->getProperties($name)) || $this->getProperties($name) === true;
+        return $nested
+            ? (is_numeric($this->getNestedProperties($name)) || $this->getNestedProperties($name) === true)
+            : (is_numeric($this->getProperties($name)) || $this->getProperties($name) === true);
     }
 
     public function setProperties(string $name, $value): self{
