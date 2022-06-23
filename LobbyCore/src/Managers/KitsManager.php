@@ -46,7 +46,7 @@ abstract class KitsManager
 
     #[Pure] public static function getKit(string $kit): ?Kit
     {
-        return self::getKits()[$kit];
+        return self::getKits()[$kit] ?? reset(self::$kits);
     }
 
 }
