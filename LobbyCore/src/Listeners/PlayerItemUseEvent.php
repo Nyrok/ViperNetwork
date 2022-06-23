@@ -24,7 +24,7 @@ final class PlayerItemUseEvent implements Listener
             if(LobbyManager::onSpawn($event->getPlayer()->getPosition())){
                 match ($event->getItem()->getId()){
                     ItemIds::FEATHER => $player->isOnGround() ? PlayerUtils::bumpPlume($player) : null,
-                    ItemIds::MINECART_WITH_CHEST => $player->sendForm(FormsManager::parametersUI($player)),
+                    ItemIds::MINECART_WITH_CHEST => FormsManager::parametersUI($player),
                     default => null
                 };
             }

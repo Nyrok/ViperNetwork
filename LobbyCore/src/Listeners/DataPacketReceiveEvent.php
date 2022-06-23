@@ -23,11 +23,14 @@ use pocketmine\network\mcpe\protocol\LevelEventPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 use pocketmine\network\mcpe\protocol\PlayerActionPacket;
 use pocketmine\network\mcpe\protocol\PlayerAuthInputPacket;
+use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataFlags;
 use pocketmine\network\mcpe\protocol\types\inventory\UseItemOnEntityTransactionData;
 use pocketmine\network\mcpe\protocol\types\LevelEvent;
 use pocketmine\network\mcpe\protocol\types\LevelSoundEvent;
 use pocketmine\network\mcpe\protocol\types\PlayerAction;
+use pocketmine\network\mcpe\protocol\types\PlayerAuthInputFlags;
 use pocketmine\network\mcpe\protocol\types\PlayerBlockActionWithBlockInfo;
+use pocketmine\Server;
 use pocketmine\world\Position;
 
 final class DataPacketReceiveEvent implements Listener
@@ -53,6 +56,13 @@ final class DataPacketReceiveEvent implements Listener
                 }
                 return;
             }
+
+            if(($packet->getInputFlags() & (1 << PlayerAuthInputFlags::UP)) !== 0){
+                if($player->getPlayerProperties()->canSend("parameters.autosprint", true)){
+                    $player->setSprinting();
+                }
+            }
+
             try {
                 $actions = $packet->getBlockActions();
                 if (is_null($actions)) return;
@@ -113,11 +123,11 @@ final class DataPacketReceiveEvent implements Listener
 
                         $pass = false;
                         if (
-                            $item instanceof Pickaxe && $target->getBreakInfo()->getToolType() === BlockToolType::PICKAXE ||
-                            $item instanceof Axe && $target->getBreakInfo()->getToolType() === BlockToolType::AXE ||
-                            $item instanceof Shovel && $target->getBreakInfo()->getToolType() === BlockToolType::SHOVEL ||
+                            ($item instanceof Pickaxe && $target->getBreakInfo()->getToolType() === BlockToolType::PICKAXE) ||
+                            ($item instanceof Axe && $target->getBreakInfo()->getToolType() === BlockToolType::AXE) ||
+                            ($item instanceof Shovel && $target->getBreakInfo()->getToolType() === BlockToolType::SHOVEL) ||
                             $item instanceof Sword ||
-                            $item instanceof Hoe && $target->getBreakInfo()->getToolType() === BlockToolType::HOE
+                            ($item instanceof Hoe && $target->getBreakInfo()->getToolType() === BlockToolType::HOE)
                         ) $pass = true;
 
 

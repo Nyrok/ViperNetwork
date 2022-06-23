@@ -2,11 +2,11 @@
 
 namespace Nyrok\LobbyCore\Listeners;
 
-use Nyrok\LobbyCore\Objects\CustomPickaxe;
-use Nyrok\LobbyCore\Objects\CustomAxe;
-use Nyrok\LobbyCore\Objects\CustomHoe;
-use Nyrok\LobbyCore\Objects\CustomShovel;
-use Nyrok\LobbyCore\Objects\CustomSword;
+use Nyrok\LobbyCore\Items\CustomAxe;
+use Nyrok\LobbyCore\Items\CustomHoe;
+use Nyrok\LobbyCore\Items\CustomPickaxe;
+use Nyrok\LobbyCore\Items\CustomShovel;
+use Nyrok\LobbyCore\Items\CustomSword;
 use pocketmine\event\Listener;
 use pocketmine\event\block\BlockBreakEvent as ClassEvent;
 use pocketmine\world\particle\BlockBreakParticle;
