@@ -1,5 +1,5 @@
 ---
-prefix: "§d[§5ViperNetwork§d] "
+prefix: "§d[§5CobraNetwork§d] "
 
 grades:
   # TODO: LE PREMIER GRADE EST LE GRADE PAR DEFAUT!
@@ -154,4 +154,24 @@ cooldowns:
   368:
     name: ender-perle
     cooldown: 15
+
+# Raison du ban: Temps de ban
+bans:
+  Triche: 30D
+  Hacking:
+    - 30D
+  Spam:
+    - 2D
+
+# Raison du mute: Temps de mute
+mutes:
+  Spam:
+    - 15M
+    - 1H
+    - 1D
+  Caca: 10Y
+
+# - Raison du Kick
+kicks:
+  - Skin Inapproprié
 ...

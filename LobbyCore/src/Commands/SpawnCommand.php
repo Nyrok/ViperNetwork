@@ -2,11 +2,16 @@
 
 namespace Nyrok\LobbyCore\Commands;
 
+use Nyrok\LobbyCore\Core;
 use Nyrok\LobbyCore\Managers\FormsManager;
 use Nyrok\LobbyCore\Managers\LobbyManager;
 use Nyrok\LobbyCore\Player\ViperPlayer;
+use Nyrok\LobbyCore\Tasks\SpawnTask;
 use pocketmine\command\CommandSender;
 use pocketmine\lang\Translatable;
+use pocketmine\scheduler\ClosureTask;
+use pocketmine\utils\MainLogger;
+use pocketmine\world\Position;
 
 final class SpawnCommand extends ViperCommands
 {
@@ -21,7 +26,7 @@ final class SpawnCommand extends ViperCommands
     {
         if(parent::execute($sender,$commandLabel, $args))
         if($sender instanceof ViperPlayer){
-            LobbyManager::load($sender);
+            Core::getInstance()->getScheduler()->scheduleDelayedTask(new SpawnTask($sender->getPosition(), 3, $sender), 10);
         }
     }
 

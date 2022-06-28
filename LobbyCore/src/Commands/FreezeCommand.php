@@ -4,6 +4,7 @@ namespace Nyrok\LobbyCore\Commands;
 
 use pocketmine\command\CommandSender;
 use pocketmine\lang\Translatable;
+use pocketmine\player\Player;
 
 final class FreezeCommand extends ViperCommands
 {
@@ -20,7 +21,8 @@ final class FreezeCommand extends ViperCommands
         if(isset($args[0])){
             $player = $this->getOwningPlugin()->getServer()->getPlayerByPrefix($args[0]);
             $sender_language = $this->getSenderLanguage($sender);
-            if($player){
+            if($player instanceof Player){
+                $player->teleport($player->getPosition()->add(0, 9, 0));
                 $player->setImmobile(true);
                 $player->getLanguage()->getMessage("messages.freeze.freezed", ["{player}" => $sender->getName()])->send($player);
                 $sender_language?->getMessage("messages.freeze.freezer", ["{player}" => $player->getName()])->send($sender);

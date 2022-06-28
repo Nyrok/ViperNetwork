@@ -20,6 +20,7 @@ use Nyrok\LobbyCore\Listeners\PlayerItemUseEvent;
 use Nyrok\LobbyCore\Listeners\PlayerJoinEvent;
 use Nyrok\LobbyCore\Listeners\PlayerQuitEvent;
 use Nyrok\LobbyCore\Listeners\ProjectileHitBlockEvent;
+use Nyrok\LobbyCore\Listeners\WorldLoadEvent;
 use pocketmine\event\Listener;
 use pocketmine\plugin\Plugin;
 
@@ -46,6 +47,7 @@ abstract class ListenersManager
             new PlayerDeathEvent(),
             new ProjectileHitBlockEvent(),
             new EntityTeleportEvent(),
+            new WorldLoadEvent(),
         ];
     }
 
