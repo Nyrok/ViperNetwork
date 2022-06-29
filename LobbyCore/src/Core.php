@@ -38,7 +38,7 @@ class Core extends PluginBase
     protected function onEnable(): void
     {
         $this::setInstance($this);
-        $this->saveResource("config.yml", true);
+        $this->saveResource("config.yml", false);
 
         $this->config = new ConfigDatabase();
         $this->kits = new KitsDatabase();

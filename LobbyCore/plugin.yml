@@ -1,6 +1,6 @@
 name: LobbyCore
 author: Nyrok
-version: 1.0.0
+version: 1.0.1
 main: Nyrok\LobbyCore\Core
 api: [4.0.0]
 src-namespace-prefix: Nyrok\LobbyCore
