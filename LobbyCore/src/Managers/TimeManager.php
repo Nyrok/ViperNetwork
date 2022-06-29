@@ -1,6 +1,6 @@
 <?php
 
-namespace Nyrok\LobbyCore;
+namespace Nyrok\LobbyCore\Managers;
 
 abstract class TimeManager
 {

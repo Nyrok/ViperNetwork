@@ -16,6 +16,7 @@ use Nyrok\LobbyCore\Managers\KnockBackManager;
 use Nyrok\LobbyCore\Managers\LanguageManager;
 use Nyrok\LobbyCore\Managers\ListenersManager;
 use Nyrok\LobbyCore\Managers\MenuManager;
+use Nyrok\LobbyCore\Managers\TimeManager;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 
