@@ -2,6 +2,8 @@
 
 namespace Nyrok\LobbyCore\Managers;
 
+use Nyrok\LobbyCore\Core;
+
 abstract class TimeManager
 {
     public static function initTime(): void {
